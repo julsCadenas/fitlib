@@ -39,6 +39,7 @@ function App() {
         <li><a href='#'>My Catalog</a></li>
         <li><a href='#'>eBooks</a></li>
         <li><a href='#'>eLibrary</a></li>
+        <li><a href='#'>admin</a></li>
       </ul>
     </div>
     </>
