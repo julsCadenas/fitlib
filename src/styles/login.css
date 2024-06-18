@@ -1,18 +1,14 @@
-/* src/styles/App.css */
-:root {
-    --blk: #1e1e1e;
-    --grn: #096A10;
-}
+/* INSERT LOGIN PAGE CSS HERE */
 
-body {
+/* body {
     font-family: "Prompt";
     margin: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #bebebe; /* Set background to white */
-}
+    background: #bebebe;
+} */
 
 .welcome {
     position: fixed;
@@ -58,14 +54,14 @@ body {
     z-index: 2;
 }
 
-.title {
+.logintitle {
     color: #096A10;
     font-size: 65px;
     margin-top: 30px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.subtitle {
+.loginsubtitle {
     margin-top: 10px;
     margin-bottom: 20px;
     color: #1e1e1e;

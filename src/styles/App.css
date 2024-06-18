@@ -8,6 +8,8 @@ body {
     display: flex;
     margin: 0;
     height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .welcome {
@@ -97,7 +99,7 @@ body {
 
 .sidebarBtn {
     border: none;
-    background: white;
+    background: none;
     font-size: 38px;
     color: var(--blk);
     position: absolute;
@@ -146,4 +148,71 @@ body {
     }
 }
 
-/* INSERT LOGIN PAGE CSS HERE */
+/* LOGIN PAGE CSS */
+
+.logincontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Prompt";
+    width: 800px;
+    height: 500px;
+    border: 3px solid #f0f0f0;
+    border-radius: 28px;
+    margin-top: -20px;
+}
+
+.logintitle {
+    font-size: 100px;
+    color: var(--grn);
+}
+
+.loginsubtitle {
+    font-size: 30px;
+    font-weight: bold;
+    width: 700px;
+    margin-top: -30px;
+    margin-bottom: 15px;
+}
+
+.loginform input {
+    border-radius: 12px;
+    width: 400px;
+    height: 40px;
+    margin: 5px;
+    border: none;
+    background-color: #F5F8EB;
+    color: var(--blk);
+    font-family: "Prompt";
+    font-weight: 500;
+    padding-left: 20px; 
+}
+
+.loginBtn {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.loginBtn button {
+    width: 250px;
+    height: 40px;
+    font-size: 24px;
+    font-family: "Prompt";
+    font-weight: bold;
+    background-color: var(--grn);
+    color: white;
+    border-radius: 16px;
+    border: none;
+    transition: width 0.3s ease;
+}
+
+.loginBtn button:hover {
+    width: 300px;
+}
+
+@media screen and (max-width: 768px){
+    
+}
