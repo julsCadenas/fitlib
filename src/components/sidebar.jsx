@@ -4,6 +4,7 @@ import '../styles/App.css';  // Adjust the path as needed
 const SideBar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const sidebarRef = useRef(null);
+    const [mode, setMode] = React.useState("dark");
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -23,6 +24,26 @@ const SideBar = () => {
         setSidebarOpen(!sidebarOpen);
     };
 
+    // DARK MODE FUNCTION
+    // NOTE: nilagay ko pa dark mode, hindi pa final colors yan 
+    useEffect(() => {
+      const selectedTheme = localStorage.getItem("selectedTheme");
+        if (selectedTheme) {
+          setMode(selectedTheme);
+          document.querySelector("body").setAttribute('data-theme', selectedTheme);
+        }
+    }, []); 
+  
+    const selectedTheme = localStorage.getItem("selectedTheme");
+  
+    const toggleMode = (e) => {
+      const newMode = mode === "Dark" ? "Light" : "Dark";
+      setMode(newMode);
+      localStorage.setItem("selectedTheme", newMode)
+      document.querySelector("body").setAttribute('data-theme', newMode);
+    }
+
+
     return (
         <>
             <button className={`sidebarBtn ${sidebarOpen ? 'open' : 'closed'}`} onClick={toggleSidebar}>&#9776;</button>
@@ -36,6 +57,7 @@ const SideBar = () => {
                     <li><a href='#'>My Catalog</a></li>
                     <li><a href='#'>eBooks</a></li>
                     <li><a href='#'>eLibrary</a></li>
+                    <li><a href='#'  onClick={toggleMode} defaultChecked={selectedTheme === "light"}>{mode}</a></li>
                 </ul>
             </div>
         </>

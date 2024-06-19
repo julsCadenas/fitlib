@@ -1,7 +1,19 @@
 :root {
-    --blk: #1e1e1e;
+    --font: #1e1e1e;
+    --bg: white;
     --grn: #096A10;
+    --input: #F5F8EB;
 }
+
+[data-theme="Dark"] {
+    --bg: #1e1e1e;
+    --font: white;
+    --input: #f0f0f0;
+  }
+
+/* * {
+    transition: all 0.3s ease-in-out;
+} */
 
 body {
     font-family: "Prompt";
@@ -10,13 +22,14 @@ body {
     height: 100vh;
     justify-content: center;
     align-items: center;
+    background-color: var(--bg);
 }
 
 .welcome {
     position: fixed;
     right: 0;
     top: 0;
-    color: var(--blk);
+    color: var(--font);
     padding: 20px;
     margin-right: 30px;
     font-size: 42px;
@@ -39,7 +52,7 @@ body {
     border-right: solid #f0f0f0;
     transition: transform 0.3s ease;
     transform: translateX(-100%);
-    background-color: white;
+    background-color: var(--bg);
     z-index: 1000;
     position: fixed; 
     top: 0; 
@@ -73,6 +86,7 @@ body {
 .subtitle {
     margin-top: -60px;
     margin-left: -8.5px;
+    color: var(--font);
 }
 
 .nav {
@@ -89,7 +103,7 @@ body {
 
 .nav a {
     text-decoration: none;
-    color: var(--blk);
+    color: var(--font);
     transition: font-size 0.2s ease;
 }
 
@@ -101,7 +115,7 @@ body {
     border: none;
     background: none;
     font-size: 38px;
-    color: var(--blk);
+    color: var(--font);
     position: absolute;
     top: 20px;
     left: 20px;
@@ -174,6 +188,7 @@ body {
     width: 700px;
     margin-top: -30px;
     margin-bottom: 15px;
+    color: var(--font);
 }
 
 .loginform input {
@@ -182,7 +197,7 @@ body {
     height: 40px;
     margin: 5px;
     border: none;
-    background-color: #F5F8EB;
+    background-color: var(--input);
     color: var(--blk);
     font-family: "Prompt";
     font-weight: 500;
@@ -203,7 +218,7 @@ body {
     font-family: "Prompt";
     font-weight: bold;
     background-color: var(--grn);
-    color: white;
+    color: var(--bg);
     border-radius: 16px;
     border: none;
     transition: width 0.3s ease;

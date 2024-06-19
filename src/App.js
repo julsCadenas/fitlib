@@ -9,6 +9,8 @@ function App() {
 
   return (
     <>
+      {/* <Welcome /> */}
+      {/* <SideBar /> */}
       <Login />
     </>
   );
