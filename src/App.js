@@ -1,17 +1,18 @@
 import './styles/App.css';
-import SideBar from './components/sidebar'
-import Welcome from './components/header'
-import Login from './components/Login'
-// import { doc, getDoc, setDoc } from 'firebase/firestore';
-// import db from './firebase';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Dashboard from './pages/dashboard'; 
+import Login from './pages/login'; 
 
 function App() {
-
   return (
     <>
-      {/* <Welcome /> */}
-      {/* <SideBar /> */}
-      <Login />
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Login />}></Route>
+          <Route path='dashboard' element={<Dashboard />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

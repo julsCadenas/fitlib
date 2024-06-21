@@ -3,6 +3,7 @@
     --bg: white;
     --grn: #096A10;
     --input: #F5F8EB;
+    --border: #f0f0f0;
 }
 
 [data-theme="Dark"] {
@@ -49,7 +50,7 @@ body {
     display: flex;
     flex-direction: column; 
     align-items: center;
-    border-right: solid #f0f0f0;
+    border-right: solid var(--border);
     transition: transform 0.3s ease;
     transform: translateX(-100%);
     background-color: var(--bg);
@@ -230,4 +231,77 @@ body {
 
 @media screen and (max-width: 768px){
     
+}
+
+/* DASHBOARD CSS */
+
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.elibContainer, .archiveContainer {
+    width: 1250px;
+    height: 300px;
+    background-color: var(--bg);
+    border-radius: 32px;
+    border: 2px solid var(--border);
+    box-shadow: 5px 5px var(--border);
+    margin: 10px;
+    font-family: "Prompt";
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.elibContainer p, .archiveContainer p {
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 30px;
+    color: var(--grn);
+}
+
+.elibbooks ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.elibbooks .bookItem {
+    margin: 10px;
+    margin-top: -45px;
+}
+
+.elibbooks .bookItem img {
+    width: 140px;
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 16px; 
+    border: 5px solid var(--border);
+    transition: height 0.3s ease;
+}
+
+.bookItem img:hover{
+    height: 220px; 
+}
+
+.goBtn, .goBtn2 {
+    width: 100px;
+    height: 30px;
+    font-size: 18px;
+    font-family: "Prompt";
+    font-weight: bold;
+    background-color: var(--grn);
+    color: var(--bg);
+    border-radius: 16px;
+    border: none;
+    transition: width 0.3s ease;
+    margin-left: 15px;
+}
+
+.goBtn:hover, .goBtn2:hover {
+    width: 130px;
 }

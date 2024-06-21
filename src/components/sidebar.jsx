@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../styles/App.css';  // Adjust the path as needed
+import '../styles/App.css';  
 
 const SideBar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
