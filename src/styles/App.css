@@ -35,7 +35,7 @@ body {
     color: var(--font);
     padding: 20px;
     margin-right: 30px;
-    font-size: 42px;
+    font-size: 48px;
     z-index: 1003;
     backdrop-filter: blur(10px); 
     background-color: rgba(255, 255, 255, 0.5);
@@ -183,6 +183,9 @@ body {
     .nav {
         margin-top: 40px;
         font-size: 18px;
+    }
+    .nav li {
+        width: 240px;
     }
 }
 
@@ -377,5 +380,23 @@ body {
 @media screen and (max-height: 667px) {
     .dashboardContainer {
         margin-top: 150px;
+    }
+}
+
+@media screen and (max-width: 344px) {
+    .welcome {
+        font-size: 22px;
+    }
+    .elibContainer, .archiveContainer {
+        width: 300px;
+    }
+    .sidebar {
+        width: 280px;
+    }
+    .sidebarBtn.open {
+        left: 290px;
+    }
+    .nav li {
+        width: 220px;
     }
 }
