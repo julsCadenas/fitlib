@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBook, faFileAlt, faDatabase } from '@fortawesome/free-solid-svg-icons'; // Import icons you want to use
 import '../styles/App.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 const SideBar = () => {

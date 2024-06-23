@@ -3,6 +3,7 @@ import Header from '../components/header';
 import SideBar from '../components/sidebar';
 import db from '../firebase'; 
 import { collection, getDocs } from "firebase/firestore";
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
     const [books, setBooks] = useState([]);
@@ -25,7 +26,7 @@ const Dashboard = () => {
             <div className='dashboardContainer'>
                 <div className='elibContainer'>
                     <p>eLibrary</p>
-                    <button className='goBtn'>SEE ALL</button>
+                    <Link to='/elibrary'><button className='goBtn'>SEE ALL</button></Link>
                     <div className='elibbooks'>
                         <ul>
                         {books.map((book, index) => (
@@ -38,7 +39,7 @@ const Dashboard = () => {
                 </div>
                 <div className='archiveContainer'>
                     <p>FIT Library</p>
-                    <button className='goBtn2'>SEE ALL</button>
+                    <Link to='/ebooks'><button className='goBtn'>SEE ALL</button></Link>
                     <div className='elibbooks'>
                         <ul>
                         {books.map((book, index) => (
