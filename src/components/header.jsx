@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/App.css'; // Make sure the path is correct
+import '../styles/App.css'; 
 
 const Welcome = () => {
     return (
