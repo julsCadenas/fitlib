@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../styles/App.css';  
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faBook, faFileAlt, faDatabase } from '@fortawesome/free-solid-svg-icons'; // Import icons you want to use
+import '../styles/App.css';
 
 const SideBar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -53,11 +55,11 @@ const SideBar = () => {
                     <p className='subtitle'><strong>Official Library of FEU Institute of Technology</strong></p>
                 </div>
                 <ul className='nav'>
-                    <li><a href='#'>Discover</a></li>
-                    <li><a href='#'>My Catalog</a></li>
-                    <li><a href='#'>eBooks</a></li>
-                    <li><a href='#'>eLibrary</a></li>
-                    {/* <li><a href='#'  onClick={toggleMode} defaultChecked={selectedTheme === "light"}>{mode}</a></li> */}
+                    <li><a href='#'><FontAwesomeIcon className='icon' icon={faSearch} /> Discover</a></li>
+                    <li><a href='#'><FontAwesomeIcon className='icon' icon={faBook} /> My Catalog</a></li>
+                    <li><a href='#'><FontAwesomeIcon className='icon' icon={faFileAlt} /> eBooks</a></li>
+                    <li><a href='#'><FontAwesomeIcon className='icon' icon={faDatabase} /> eLibrary</a></li>
+                    {/* <li><a href='#' onClick={toggleMode}>{mode === 'Dark' ? 'Dark Mode' : 'Light Mode'}</a></li> */}
                 </ul>
             </div>
         </>

@@ -100,20 +100,38 @@ body {
     margin-left: -50px;
     margin-top: 50px;
     font-weight: 600;
+    margin-left: -30px;
 }
 
 .nav li {
     margin-bottom: 20px;
+    width: 280px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 16px;
+    padding-left: 40px;
+    transition: background-color 0.2s ease;
 }
 
 .nav a {
     text-decoration: none;
     color: var(--font);
-    transition: font-size 0.2s ease;
+    transition: background-color 0.2s ease;
+    width: 280px;
+}
+
+.nav li:hover {
+    background-color: var(--grn);
+    color: var(--bg);
 }
 
 .nav a:hover {
-    font-size: 24px;
+    color: var(--bg);
+}
+
+.icon {
+    margin-right: 15px;
 }
 
 .sidebarBtn {
