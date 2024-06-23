@@ -338,18 +338,51 @@ body {
     font-size: 18px;
     font-family: "Prompt";
     font-weight: bold;
-    background-color: var(--grn);
-    color: var(--bg);
+    background-color: var(--bg);
+    color: var(--grn);
     border-radius: 16px;
     border: none;
     transition: width 0.3s ease;
+    transition: background-color 0.2s ease;
+    transition: color 0.2s ease;
     margin-left: 15px;
 }
 
-.goBtn:hover, .goBtn2:hover {
-    width: 140px;
+.goBtn, .goBtn2 button {
+    border: 2px solid var(--grn);
 }
 
+.goBtn:hover, .goBtn2:hover {
+    /* width: 140px; */
+    background-color: var(--grn);
+    color: var(--bg);
+}
+
+@media screen and (max-width: 1270px) {
+    .elibContainer, .archiveContainer {
+        width: 900px;
+        height: 300px;
+        font-size: 24px;
+        overflow: auto;
+    }
+    .elibbooks ul {
+        flex-wrap: nowrap;
+        /* flex-direction: row; */
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+
+    .elibbooks .bookItem {
+        margin: 0;
+        margin-top: 0;
+        margin-right: 5px;
+    }
+
+    .elibbooks .bookItem img {
+        width: 100px;
+        height: 150px; 
+    }
+}
 
 @media screen and (max-width: 768px) {
     .elibContainer, .archiveContainer {
@@ -375,7 +408,6 @@ body {
         width: 100px;
         height: 150px; 
     }
-
 }
 
 @media screen and (max-height: 667px) {
