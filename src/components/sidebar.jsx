@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBook, faFileAlt, faDatabase } from '@fortawesome/free-solid-svg-icons'; // Import icons you want to use
 import '../styles/App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -45,7 +47,6 @@ const SideBar = () => {
       document.querySelector("body").setAttribute('data-theme', newMode);
     }
 
-
     return (
         <>
             <button className={`sidebarBtn ${sidebarOpen ? 'open' : 'closed'}`} onClick={toggleSidebar}>&#9776;</button>
@@ -55,11 +56,10 @@ const SideBar = () => {
                     <p className='subtitle'><strong>Official Library of FEU Institute of Technology</strong></p>
                 </div>
                 <ul className='nav'>
-                    <li><a href='#'><FontAwesomeIcon className='icon' icon={faSearch} /> Discover</a></li>
-                    <li><a href='#'><FontAwesomeIcon className='icon' icon={faBook} /> My Catalog</a></li>
-                    <li><a href='#'><FontAwesomeIcon className='icon' icon={faFileAlt} /> eBooks</a></li>
-                    <li><a href='#'><FontAwesomeIcon className='icon' icon={faDatabase} /> eLibrary</a></li>
-                    {/* <li><a href='#' onClick={toggleMode}>{mode === 'Dark' ? 'Dark Mode' : 'Light Mode'}</a></li> */}
+                    <li><Link to='/dashboard'><FontAwesomeIcon className='icon' icon={faSearch} /> Discover</Link></li>
+                    <li><Link to='/mycatalog'><FontAwesomeIcon className='icon' icon={faBook} /> My Catalog</Link></li>
+                    <li><Link to='/ebooks'><FontAwesomeIcon className='icon' icon={faFileAlt} /> eBooks</Link></li>
+                    <li><Link to='/elibrary'><FontAwesomeIcon className='icon' icon={faDatabase} /> eLibrary</Link></li>
                 </ul>
             </div>
         </>

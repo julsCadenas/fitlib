@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Welcome from '../components/header';
+import Header from '../components/header';
 import SideBar from '../components/sidebar';
 import db from '../firebase'; 
 import { collection, getDocs } from "firebase/firestore";
@@ -20,7 +20,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <Welcome />
+            <Header />
             <SideBar />
             <div className='dashboardContainer'>
                 <div className='elibContainer'>
