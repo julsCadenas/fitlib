@@ -57,7 +57,7 @@ const SideBar = () => {
                     <li><a href='#'>My Catalog</a></li>
                     <li><a href='#'>eBooks</a></li>
                     <li><a href='#'>eLibrary</a></li>
-                    <li><a href='#'  onClick={toggleMode} defaultChecked={selectedTheme === "light"}>{mode}</a></li>
+                    {/* <li><a href='#'  onClick={toggleMode} defaultChecked={selectedTheme === "light"}>{mode}</a></li> */}
                 </ul>
             </div>
         </>

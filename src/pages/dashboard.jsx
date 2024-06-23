@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../components/header';
+import Welcome from '../components/header';
 import SideBar from '../components/sidebar';
 import db from '../firebase'; 
 import { collection, getDocs } from "firebase/firestore";
@@ -11,7 +11,7 @@ const Dashboard = () => {
         const fetchBooks = async () => {
             const booksCollection = collection(db, 'Books');
             const booksSnapshot = await getDocs(booksCollection);
-            const booksList = booksSnapshot.docs.map(doc => doc.data());
+            const booksList = booksSnapshot.docs.map(doc => doc.data()).slice(0,7);
             setBooks(booksList);
         };
 
@@ -20,12 +20,12 @@ const Dashboard = () => {
 
     return (
         <>
-            <Header />
+            <Welcome />
             <SideBar />
             <div className='dashboardContainer'>
                 <div className='elibContainer'>
                     <p>eLibrary</p>
-                    <button className='goBtn'>GO</button>
+                    <button className='goBtn'>SEE ALL</button>
                     <div className='elibbooks'>
                         <ul>
                         {books.map((book, index) => (
@@ -38,7 +38,7 @@ const Dashboard = () => {
                 </div>
                 <div className='archiveContainer'>
                     <p>FIT Library</p>
-                    <button className='goBtn2'>GO</button>
+                    <button className='goBtn2'>SEE ALL</button>
                     <div className='elibbooks'>
                         <ul>
                         {books.map((book, index) => (
