@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/App.css';
 import { useNavigate } from 'react-router-dom';
+import logo from '../images/fitlib.png';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,7 +15,8 @@ const Login = () => {
   return (
     <div className="logincontainer">
         <div className="maintitle">
-          <div className="logintitle"><strong>FIT LIBRARY</strong></div>
+          {/* <div className="logintitle"><strong>FIT LIBRARY</strong></div> */}
+          <div className="logintitle"><img src={logo}></img></div>
           <div className="loginsubtitle">Official Library of the FEU Institute of Technology</div>
         </div>
         <form action="#" className='loginform' onSubmit={handleLogin}>

@@ -38,7 +38,7 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className='archiveContainer'>
-                    <p>FIT Library</p>
+                    <p>eBooks</p>
                     <Link to='/ebooks'><button className='goBtn'>SEE ALL</button></Link>
                     <div className='elibbooks'>
                         <ul>

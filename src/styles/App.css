@@ -82,14 +82,18 @@ body {
     z-index: 2;
 }
 
-.title {
-    color: var(--grn);
+.title img {
+    /* color: var(--grn);
     font-size: 48px;
-    margin-top: 30px;
+    margin-top: 30px; */
+    width: 365px;
+    height: auto;
+    margin-top: -35px;
 }
 
 .subtitle {
-    margin-top: -60px;
+    width: 350px;
+    margin-top: -95px;
     margin-left: -8.5px;
     color: var(--font);
 }
@@ -157,6 +161,11 @@ body {
     z-index: 1003;
 }
 
+.logout {
+    position: absolute;
+    bottom: 0;
+}
+
 @media screen and (max-width: 768px){
     .welcome {
         font-size: 24px;
@@ -169,12 +178,16 @@ body {
     .sidebar {
         width: 300px;
     }
-    .title {
-        font-size: 42px;
+    .title img {
+        /* font-size: 42px; */
+        width: 310px;
+        height: auto;
+        margin-top: -25px;
     }
     .subtitle {
+        width: 300px;
         font-size: 15px;
-        margin-top: -60px;
+        margin-top: -90px;
         padding: 10px;
     }
     .sidebarBtn.open {
@@ -198,22 +211,28 @@ body {
     flex-direction: column;
     font-family: "Prompt";
     width: 800px;
-    height: 500px;
+    height: 550px;
     border: 3px solid #f0f0f0;
     border-radius: 28px;
     /* margin-top: -20px; */
 }
 
-.logintitle {
+/* .logintitle {
     font-size: 100px;
     color: var(--grn);
+} */
+
+.logintitle img {
+    width: 750px;
+    height: auto;
+    margin-top: -140px;    
 }
 
 .loginsubtitle {
     font-size: 30px;
     font-weight: bold;
     width: 700px;
-    margin-top: -30px;
+    margin-top: -190px;
     margin-bottom: 15px;
     color: var(--font);
 }
@@ -260,13 +279,15 @@ body {
         width: 350px;
         height: 400px;
     }
-    .logintitle {
-        font-size: 55px;
+    .logintitle img{
+        width: 350px;
+        height: auto;
+        margin-top: -55px;
     }
     .loginsubtitle {
         width: 350px;
         font-size: 16px;
-        margin-top: -20px;
+        margin-top: -90px;
     }
     .loginform input {
         width: 270px;
@@ -287,7 +308,7 @@ body {
 }
 
 .elibContainer, .archiveContainer {
-    width: 1250px;
+    width: 1300px;
     height: 300px;
     background-color: var(--bg);
     border-radius: 32px;
@@ -367,7 +388,6 @@ body {
     }
     .elibbooks ul {
         flex-wrap: nowrap;
-        /* flex-direction: row; */
         overflow-x: auto;
         justify-content: flex-start;
     }
