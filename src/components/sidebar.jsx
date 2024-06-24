@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faBook, faFileAlt, faDatabase, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; // Import icons you want to use
+import { faSearch, faBook, faFileAlt, faDatabase, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; 
 import '../styles/App.css';
 import { Link } from 'react-router-dom';
 import logo from '../images/fitlib.png'
@@ -61,7 +61,7 @@ const SideBar = () => {
                     <li><Link to='/mycatalog'><FontAwesomeIcon className='icon' icon={faBook} /> My Catalog</Link></li>
                     <li><Link to='/ebooks'><FontAwesomeIcon className='icon' icon={faFileAlt} /> eBooks</Link></li>
                     <li><Link to='/elibrary'><FontAwesomeIcon className='icon' icon={faDatabase} /> eLibrary</Link></li>
-                    <li className='logout'><Link to='/login'><FontAwesomeIcon className='icon' icon={faSignOutAlt} /> Logout</Link></li>
+                    <li className='logout'><FontAwesomeIcon className='icon' icon={faSignOutAlt} /> Logout</li>
                 </ul>
             </div>
         </>
