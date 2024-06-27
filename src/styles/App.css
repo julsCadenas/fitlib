@@ -231,6 +231,14 @@ body {
     /* margin-top: -20px; */
 }
 
+.loginform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* width: 100%;  */
+    /* padding: 20px; */
+}
+
 /* .logintitle {
     font-size: 100px;
     color: var(--grn);
@@ -239,14 +247,15 @@ body {
 .logintitle img {
     width: 750px;
     height: auto;
-    margin-top: -140px;    
+    /* margin-top: -140px;     */
+    /* background-color: black; */
 }
 
 .loginsubtitle {
     font-size: 30px;
     font-weight: bold;
     width: 700px;
-    margin-top: -190px;
+    /* margin-top: -190px; */
     margin-bottom: 15px;
     color: var(--font);
 }
@@ -269,6 +278,7 @@ body {
     justify-content: center;
     text-align: center;
     padding: 20px;
+    margin-top: 20px; 
 }
 
 .loginBtn button {
@@ -282,6 +292,7 @@ body {
     border-radius: 16px;
     border: none;
     transition: width 0.3s ease;
+    
 }
 
 .loginBtn button:hover {
