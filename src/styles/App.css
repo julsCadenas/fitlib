@@ -84,22 +84,22 @@ body {
     flex-direction: column;
     align-items: center;  
     text-align: center; 
-    margin-top: -15px;
+    margin-top: 15px;
     z-index: 2;
 }
 
 .title img {
     /* color: var(--grn);
-    font-size: 48px;
-    margin-top: 30px; */
+    font-size: 48px; */
+    /* margin-top: 30px;  */
     width: 365px;
     height: auto;
-    margin-top: -35px;
+    /* margin-top: -35px; */
 }
 
 .subtitle {
     width: 350px;
-    margin-top: -95px;
+    margin-top: 0;
     margin-left: -8.5px;
     color: var(--font);
 }
@@ -196,12 +196,12 @@ body {
         /* font-size: 42px; */
         width: 310px;
         height: auto;
-        margin-top: -25px;
+        /* margin-top: -25px; */
     }
     .subtitle {
         width: 300px;
         font-size: 15px;
-        margin-top: -90px;
+        margin-top: -15px;
         padding: 10px;
     }
     .sidebarBtn.open {
@@ -307,12 +307,12 @@ body {
     .logintitle img{
         width: 350px;
         height: auto;
-        margin-top: -55px;
+        /* margin-top: -55px; */
     }
     .loginsubtitle {
         width: 350px;
         font-size: 16px;
-        margin-top: -90px;
+        /* margin-top: -90px; */
     }
     .loginform input {
         width: 270px;
@@ -320,6 +320,7 @@ body {
     .loginBtn button {
         width: 150px;
         height: 35px;
+        font-size: 18px;
     }
 }
 

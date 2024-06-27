@@ -51,7 +51,7 @@ const Login = () => {
             <div className="loginBtn">
                 <button type="submit" 
                         disabled={isSigningIn}>
-                        {isSigningIn ? 'Signing In...' : 'Sign In'}
+                        {isSigningIn ? 'Logging In...' : 'Log In'}
                 </button>
             </div>
         </form>
