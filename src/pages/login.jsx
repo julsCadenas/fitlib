@@ -18,6 +18,7 @@ const Login = () => {
     if(!isSigningIn){
       setIsSigningIn(true)
       await doSignInWithEmailandPassword(email, password)
+      console.log(email)
     }
   }
 
