@@ -1,15 +1,21 @@
 :root {
     --font: #1e1e1e;
-    --bg: white;
+    /* --bg: white; */
+    --bg: #EBE6E0;
     --grn: #096A10;
+    /* --grn: #4C7766; */
     --input: #F5F8EB;
-    --border: #f0f0f0;
+    /* --border: #f0f0f0; */
+    --border: #D3D3D3;
 }
 
 [data-theme="Dark"] {
     --bg: #1e1e1e;
-    --font: white;
-    --input: #f0f0f0;
+    --font: #EBE6E0;
+    --input: #404040;
+    --grn: #26a164;
+    --border: #404040;
+    /* --grn: #096A10; */
   }
 
 /* * {
@@ -38,7 +44,7 @@ body {
     font-size: 48px;
     z-index: 1003;
     backdrop-filter: blur(10px); 
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: var(--bg);
     border-radius: 32px; 
 }
 
@@ -136,6 +142,7 @@ body {
 
 .icon {
     margin-right: 15px;
+    color: var(--font);
 }
 
 .sidebarBtn {
@@ -161,9 +168,16 @@ body {
     z-index: 1003;
 }
 
-.logout {
+/* .logout {
     position: absolute;
     bottom: 0;
+    color: var(--font);
+} */
+
+.bottomBtns {
+    position: absolute;
+    bottom: 0;
+    color: var(--font);
 }
 
 @media screen and (max-width: 768px){
@@ -212,7 +226,7 @@ body {
     font-family: "Prompt";
     width: 800px;
     height: 550px;
-    border: 3px solid #f0f0f0;
+    border: 3px solid var(--border);
     border-radius: 28px;
     /* margin-top: -20px; */
 }
