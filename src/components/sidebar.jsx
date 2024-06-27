@@ -80,7 +80,7 @@ const SideBar = () => {
                         </li>
                         <li className='logout'>
                             <a onClick={handleLogout}>
-                            <FontAwesomeIcon className='icon' icon={faSignOutAlt} />Logout
+                            <FontAwesomeIcon className='icon' icon={faSignOutAlt} /> Logout
                             </a>
                         </li>
                     </div>

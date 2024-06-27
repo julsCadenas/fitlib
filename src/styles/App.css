@@ -136,13 +136,13 @@ body {
     color: var(--bg);
 }
 
-.nav a:hover {
-    color: var(--bg);
-}
-
 .icon {
     margin-right: 15px;
     color: var(--font);
+}
+
+.nav a:hover .icon, .nav a:hover {
+    color: var(--bg);
 }
 
 .sidebarBtn {
@@ -179,6 +179,10 @@ body {
     bottom: 0;
     color: var(--font);
 }
+
+/* .boticon:hover {
+    color: var(--bg);
+} */
 
 @media screen and (max-width: 768px){
     .welcome {
