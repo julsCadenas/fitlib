@@ -1,16 +1,25 @@
 import Header from '../components/header';
 import SideBar from '../components/sidebar';
+import Login from './login';
+import { useAuth } from '../contexts/authContext'
 
-const eLibrary = () => {
 
+const Elibrary = () => {
+    const { userLoggedIn } = useAuth(); 
 
     return (
         <>
-            <Header />
-            <SideBar />
-            <p>elibrary</p>
+        { userLoggedIn ? 
+            <>
+                <Header />
+                <SideBar />
+                <>eLibrary</>
+            </>
+            :
+            <Login />
+        }
         </>
     );
 }
 
-export default eLibrary;
+export default Elibrary;
