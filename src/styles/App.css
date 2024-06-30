@@ -5,6 +5,7 @@
     --grn: #096A10;
     /* --grn: #4C7766; */
     --input: #F5F8EB;
+    /* --input: #d3d3d3; */
     /* --border: #f0f0f0; */
     --border: #D3D3D3;
 }
@@ -20,6 +21,25 @@
 
 * {
     transition: all 0.09s ease-in-out;
+}
+
+/* SCROLLBAR CSS */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: var(--input);
+    border-radius: 16px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border);
 }
 
 body {
@@ -475,3 +495,55 @@ body {
         width: 220px;
     }
 }
+
+/* EBOOKS PAGE CSS */
+
+.ebooksContainer {
+    margin-top: 60px;
+    width: 1500px;
+    height: 750px;
+    border: 3px solid var(--border);
+    border-radius: 28px 10px 12px 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.eBooks {
+    font-size: 40px;
+    color: var(--grn);
+    margin-left: -1200px;
+    /* margin-top: -1500px; */
+}
+
+.elibbooks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#ebooks2 {
+    margin-top: 1520px;
+    display: flex;
+}
+
+#ebooks2 li {
+    margin: 10px;
+}
+
+.booktitle {
+    width: 200px; 
+    font-size: 18px;
+    padding: 10px; 
+    color: var(--font);
+}
+
+#bookitem2 {
+    width: 200px;
+    height: 400px;
+}
+
+
+  
