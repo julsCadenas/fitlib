@@ -65,7 +65,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                 <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 18}}>
                 <strong>{(selectedBook?.status).charAt(0).toUpperCase() + (selectedBook?.status).slice(1) }</strong> 
                 </Typography>
-                {/* <button>Download</button> */}
+                <button className='modalbtn' ><strong>Download</strong></button>
             </div>
             </Box>
         </Fade>

@@ -692,7 +692,7 @@ body {
     margin-top: 10px;
 }
 
-.modalstatus {
+.modalstatus, .modalbtn {
     display: flex;
     justify-content: center;
     width: 200px;
@@ -703,6 +703,20 @@ body {
     text-align: center; 
     align-self: center;
 }
+
+.modalbtn {
+    margin-top: 10px;
+    font-size: 18px;
+    font-family: 'Prompt';
+    background-color: var(--bg);
+    color: var(--grn);
+}
+
+.modalbtn:hover {
+    background-color: var(--grn);
+    color: var(--bg);
+}
+
 
 @media screen and (max-width: 852px) {
     .modalcontainer {
