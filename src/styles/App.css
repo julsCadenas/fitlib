@@ -65,7 +65,10 @@ body {
     z-index: 1003;
     backdrop-filter: blur(10px); 
     background-color: var(--bg);
+    /* background-color: black; */
     border-radius: 32px; 
+    width: 1800px;
+    text-align: right;
 }
 
 /* SIDEBAR CSS */
@@ -174,7 +177,7 @@ body {
     top: 20px;
     left: 20px;
     transition: font-size 0.3s ease, left 0.3s ease;
-    z-index: 1002;
+    z-index: 1010;
     position: fixed;
     background-color: var(--bg);
 }
@@ -655,6 +658,16 @@ body {
     #bookitem2 {
         width: 100px;
         height: 150px;
+    }
+}
+
+@media screen and (max-height: 667px) {
+    .ebooksContainer {
+        /* margin-top: 250px; */
+        height: 550px;
+    }
+    .eBooks {
+        margin-top: -1220px;
     }
 }
 
