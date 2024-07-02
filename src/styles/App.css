@@ -542,7 +542,7 @@ body {
 
 .booktitle {
     width: 200px; 
-    font-size: 18px;
+    font-size: 16px;
     padding: 10px; 
     color: var(--font);
     width: 100%;
@@ -552,6 +552,15 @@ body {
 #bookitem2 {
     width: 200px;
     height: 400px;
+}
+
+#bookitem2 button {
+    border: none;
+    background-color: var(--bg);
+}
+
+.bookbtn {
+    font-family: "Prompt";
 }
 
 @media screen and (max-width: 1416px) {
@@ -647,4 +656,21 @@ body {
         width: 100px;
         height: 150px;
     }
+}
+
+/* MODAL CSS */
+
+.modalcontainer {
+    font-family: 'Prompt';
+}
+
+.content {
+    display: flex;
+}
+
+#bookcover {
+    width: 350px;
+    height: auto;
+    border-radius: 16px;
+    border: 5px solid #D3D3D3; 
 }
