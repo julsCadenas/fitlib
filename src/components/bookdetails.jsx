@@ -8,23 +8,23 @@ import Typography from '@mui/material/Typography';
 // import '../styles/modal.css';
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 750,
-  height: 550,
-  bgcolor: 'background.paper',
-  bgcolor: '#EBE6E0',
-  borderRadius: 8,
-  boxShadow: 24,
-  p: 4,
-
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    //   maxWidth: 750,
+    //   maxHeight: 550,
+    width: 'auto',
+    height: 'auto',
+    bgcolor: 'background.paper',
+    bgcolor: '#EBE6E0',
+    borderRadius: 8,
+    boxShadow: 24,
+    p: 4,
 };
 
 const BookDetails = ({ open, handleClose, selectedBook }) => {
     const darkMode = document.querySelector("body").getAttribute('data-theme') == 'Dark';
-    console.log(darkMode)
 
     if (!selectedBook) {
         return null; 
@@ -53,13 +53,16 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
             }} className="modalContent">
             <img src={selectedBook?.cover} alt={selectedBook?.title} id='bookcover' />
             <div className="textContent">
-                <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" style={{ fontFamily: 'Prompt', fontWeight: 'bold', fontSize: 24}}>
+                <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" style={{ fontFamily: 'Prompt', fontWeight: 'bold', fontSize: 18}}>
                 {selectedBook?.title}
                 </Typography>
-                <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 24}}>
+                <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 16}}>
                 <strong>Author:</strong> {selectedBook?.author}
                 </Typography>
-                <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 24}}>
+                <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5}}>
+                <strong>Genre:</strong> {selectedBook?.genre}
+                </Typography>
+                <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 18}}>
                 <strong>{(selectedBook?.status).charAt(0).toUpperCase() + (selectedBook?.status).slice(1) }</strong> 
                 </Typography>
                 {/* <button>Download</button> */}
