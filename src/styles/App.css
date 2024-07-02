@@ -578,7 +578,7 @@ body {
     }
 }
 
-@media screen and (max-width: 1420px) {
+@media screen and (max-width: 1425px) {
     #ebooks2 {
         margin-top: 1950px;
     }
@@ -588,12 +588,12 @@ body {
     .bookItem img {
         width: 200px;
     }
-    #ebooks2 {
+    /* #ebooks2 {
         margin-top: 2800px;
-    }
+    } */
 }
 
-@media screen and (max-width: 1186px) {
+@media screen and (max-width: 1203px) {
     #ebooks2 {
         margin-top: 2800px;
     }
@@ -663,13 +663,19 @@ body {
 
 @media screen and (max-height: 667px) {
     .ebooksContainer {
-        /* margin-top: 250px; */
         height: 550px;
     }
     .eBooks {
         margin-top: -1220px;
     }
 }
+
+@media screen and (max-height: 901px) {
+    .ebooksContainer {
+        height: 700px;
+    }
+}
+
 
 /* MODAL CSS */
 
