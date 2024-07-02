@@ -500,8 +500,10 @@ body {
 
 .ebooksContainer {
     margin-top: 60px;
-    width: 1500px;
-    height: 750px;
+    max-width: 1500px;
+    max-height: 750px;
+    /* width: 100%;
+    height: 100%; */
     border: 3px solid var(--border);
     border-radius: 28px 10px 12px 28px;
     display: flex;
@@ -509,12 +511,16 @@ body {
     align-items: center;
     flex-direction: column;
     overflow: auto;
-}
+    padding: 20px; 
+    box-sizing: border-box; 
+    margin-left: 10px;
+    margin-right: 10px;
+} 
 
 .eBooks {
     font-size: 40px;
     color: var(--grn);
-    margin-left: -1200px;
+    /* margin-left: -1100px; */
     /* margin-top: -1500px; */
 }
 
@@ -531,6 +537,7 @@ body {
 
 #ebooks2 li {
     margin: 10px;
+    /* flex: 1 0 200px;  */
 }
 
 .booktitle {
@@ -538,6 +545,8 @@ body {
     font-size: 18px;
     padding: 10px; 
     color: var(--font);
+    width: 100%;
+    box-sizing: border-box; 
 }
 
 #bookitem2 {
@@ -545,5 +554,97 @@ body {
     height: 400px;
 }
 
+@media screen and (max-width: 1416px) {
+    #ebooks2 {
+        margin-top: 1950px;
+    }
+}
 
-  
+@media screen and (max-width: 1184px) {
+    #ebooks2 {
+        margin-top: 3000px;
+    }
+}
+
+@media screen and (max-width: 1420px) {
+    #ebooks2 {
+        margin-top: 1950px;
+    }
+}
+
+@media screen and (max-width: 1268px) {
+    .bookItem img {
+        width: 200px;
+    }
+    #ebooks2 {
+        margin-top: 2800px;
+    }
+}
+
+@media screen and (max-width: 1186px) {
+    #ebooks2 {
+        margin-top: 2800px;
+    }
+}
+
+@media screen and (max-width: 985px) {
+    #ebooks2 {
+        margin-top: 3650px;
+    }
+} 
+
+@media screen and (max-width: 962px) {
+    #ebooks2 {
+        margin-top: 3650px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .ebooksContainer {
+        width: 350px;
+        margin-top: 75px;
+        flex-direction: column;
+        overflow: auto;
+    }
+
+    .elibbooks {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .eBooks {
+        margin-top: -1400px;
+        margin-left: 30px;
+        font-size: 24px;
+    }
+
+    #ebooks2 {
+        display: flex;
+        justify-content: center;
+    }
+
+    #ebooks2 ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
+        padding: 0;
+        margin: 0;
+    }
+
+    #ebooks2 li {
+        margin: 20px;
+    }
+
+    .booktitle {
+        font-size: 0;
+        /* width: 100px; */
+        visibility: hidden;
+    }
+
+    #bookitem2 {
+        width: 100px;
+        height: 150px;
+    }
+}

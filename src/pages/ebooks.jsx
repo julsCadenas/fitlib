@@ -35,7 +35,7 @@ const Ebooks = () => {
                         <ul>
                             {books.map((book, index) => (
                                 <li key={index} className='bookItem' id='bookitem2'>
-                                    <img src={book.cover} alt={`${book.title}`} />
+                                    <img id={book.title} src={book.cover} alt={`${book.title}`} />
                                     <div className='booktitle'>
                                         <p><strong>{`${book.title}`}</strong></p>
                                     </div>
