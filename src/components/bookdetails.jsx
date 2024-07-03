@@ -142,7 +142,11 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                                 : <strong>{selectedBook.status.charAt(0).toUpperCase() + selectedBook.status.slice(1)}</strong>
                             }
                         </Typography>
-                        <button className='modalbtn' onClick={handleDownload}><strong>OPEN</strong></button>
+                        {selectedBook.collection == "elibrary" ? 
+                            <button className='modalbtn' onClick={handleDownload}><strong>RESERVE</strong></button>
+                            : <button className='modalbtn' onClick={handleDownload}><strong>OPEN</strong></button>
+                        }
+
                     </div>
                 </Box>
             </Fade>
