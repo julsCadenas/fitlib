@@ -4,8 +4,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-import { auth, firestore } from '../firebase';
+import { auth, firestore, storage } from '../firebase';
 import { doc, setDoc, getDoc, collection, deleteDoc } from "firebase/firestore"; 
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 const style = {
     position: 'absolute',
@@ -23,6 +24,19 @@ const style = {
 const BookDetails = ({ open, handleClose, selectedBook }) => {
     const darkMode = document.querySelector("body").getAttribute('data-theme') === 'Dark';
     const [isFavorite, setIsFavorite] = useState(false);
+    const storage = getStorage();
+
+    const handleDownload = () => {
+        try {
+            const url = getDownloadURL(ref(storage, `bookfiles/${selectedBook?.title}.pdf`)).then(url=>{
+                window.open(url,'_blank')
+            });
+
+        } catch (error) {
+            console.error('Error fetching file URL:', error.code, error.message);
+        }
+    };
+    
 
     useEffect(() => {
         const checkIfFavorite = async () => {
@@ -43,6 +57,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
             checkIfFavorite();
         }
     }, [open, selectedBook]);
+
 
     if (!selectedBook) {
         return null;
@@ -127,7 +142,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                                 : <strong>{selectedBook.status.charAt(0).toUpperCase() + selectedBook.status.slice(1)}</strong>
                             }
                         </Typography>
-                        <button className='modalbtn'><strong>Download</strong></button>
+                        <button className='modalbtn' onClick={handleDownload}><strong>OPEN</strong></button>
                     </div>
                 </Box>
             </Fade>

@@ -481,6 +481,13 @@ body {
     }
 }
 
+@media screen and (max-height: 842px) {
+    .dashboardContainer {
+        margin-top: 70px;
+    }
+}
+
+
 @media screen and (max-width: 344px) {
     .welcome {
         font-size: 22px;
