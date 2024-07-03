@@ -721,13 +721,17 @@ body {
 .modalstatus, .modalbtn {
     display: flex;
     justify-content: center;
-    width: 200px;
+    width: 220px;
     border: 2px solid var(--grn);
     background-color: var(--grn);
     color: var(--bg);
     border-radius: 12px;
     text-align: center; 
     align-self: center;
+}
+
+.modalstatus:hover {
+    width: 240px;
 }
 
 .modalbtn {
