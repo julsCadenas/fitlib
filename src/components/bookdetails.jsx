@@ -122,7 +122,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                         </Typography>
                         <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 18 }}>
                             {selectedBook.bookID <= 30 ?
-                                isFavorite ? <a onClick={removeFromFavorites}><strong>Remove from Favorites</strong></a> : <a onClick={addToFavorites}><strong>Add to Favorites</strong></a>
+                                isFavorite ? <a onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 240, borderRadius: 10 }} ><strong>Remove from Favorites</strong></a> : <a onClick={addToFavorites}><strong>Add to Favorites</strong></a>
                                 : <strong>{selectedBook.status.charAt(0).toUpperCase() + selectedBook.status.slice(1)}</strong>
                             }
                         </Typography>
