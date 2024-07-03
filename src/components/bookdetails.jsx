@@ -1,10 +1,10 @@
 import * as React from 'react';
-import * as _ from 'lodash';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
+import { firestore } from '../firebase';
 // import '../styles/modal.css';
 
 const style = {
@@ -29,6 +29,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
     if (!selectedBook) {
         return null; 
     }
+    
 
     return (
         <Modal className='modalcontainer'
@@ -60,10 +61,13 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                 <strong>Author:</strong> {selectedBook?.author}
                 </Typography>
                 <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5}}>
-                <strong>Genre:</strong> {selectedBook?.genre}
+                <strong>Program:</strong> {selectedBook?.class} 
                 </Typography>
-                <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 18}}>
+                {/* <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 18}}>
                 <strong>{(selectedBook?.status).charAt(0).toUpperCase() + (selectedBook?.status).slice(1) }</strong> 
+                </Typography> */}
+                <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 18}}>
+                <a><strong>Add to Favorites</strong></a> 
                 </Typography>
                 <button className='modalbtn' ><strong>Download</strong></button>
             </div>

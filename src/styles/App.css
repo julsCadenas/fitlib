@@ -599,6 +599,12 @@ body {
     }
 }
 
+@media screen and (max-width: 1297px) {
+    .ebooksContainer {
+        margin-top: 80px;
+    }
+}
+
 @media screen and (max-width: 985px) {
     #ebooks2 {
         margin-top: 3650px;
@@ -709,6 +715,7 @@ body {
 .modalauthor,
 .modalstatus {
     margin-top: 10px;
+    cursor: pointer;
 }
 
 .modalstatus, .modalbtn {
