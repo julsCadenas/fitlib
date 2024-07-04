@@ -7,16 +7,38 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/authContext'
 import Login from './login';
 
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+};
+
 const Dashboard = () => {
     const [books, setBooks] = useState([]);
+    const [books2, setBooks2] = useState([]);
     const { userLoggedIn } = useAuth(); 
 
     useEffect(() => {
         const fetchBooks = async () => {
             const booksCollection = collection(db, 'Books');
             const booksSnapshot = await getDocs(booksCollection);
-            const booksList = booksSnapshot.docs.map(doc => doc.data()).slice(0,7);
-            setBooks(booksList);
+            const booksList = booksSnapshot.docs.map(doc => doc.data());
+            const randomBooksList = shuffleArray(booksList).slice(0, 7);
+            setBooks(randomBooksList);
+        };
+
+        fetchBooks();
+    }, []);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            const booksCollection = collection(db, 'Library');
+            const booksSnapshot = await getDocs(booksCollection);
+            const booksList = booksSnapshot.docs.map(doc => doc.data());
+            const randomBooksList = shuffleArray(booksList).slice(0, 7);
+            setBooks2(randomBooksList);
         };
 
         fetchBooks();
@@ -34,7 +56,7 @@ const Dashboard = () => {
                         <Link to='/elibrary'><button className='goBtn'>SEE ALL</button></Link>
                         <div className='elibbooks'>
                             <ul>
-                            {books.map((book, index) => (
+                            {books2.map((book, index) => (
                                 <li key={index} className='bookItem'>
                                     <img src={book.cover} alt={`${book.title}`} />
                                 </li>

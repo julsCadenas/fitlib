@@ -64,11 +64,11 @@ body {
     font-size: 48px;
     z-index: 1003;
     backdrop-filter: blur(10px); 
-    background-color: var(--bg);
+    /* background-color: var(--bg); */
     /* background-color: black; */
     border-radius: 32px; 
-    width: 1800px;
-    text-align: right;
+    /* width: 1800px; */
+    /* text-align: right; */
 }
 
 /* SIDEBAR CSS */
