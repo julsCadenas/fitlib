@@ -526,18 +526,19 @@ body {
     margin-bottom: 10px;
 } 
 
-.books {
-    width: 200px;
-    height: auto;
-    text-align: center;
-}
-
 .ebookscase {
     width: 100%; 
     height: 100%; 
     display: flex;
     justify-content: center;
 }
+
+.books {
+    width: 200px;
+    height: auto;
+    text-align: center;
+}
+
 
 .ebookscase ul {
     display: flex;
@@ -754,10 +755,6 @@ body {
 }
 
 @media screen and (max-width: 800px) {
-    .searchContainer {
-        /* width: 250px;
-        height: 30px; */
-    }
     .searchContainer input {
         width: 250px;
         height: 25px;
