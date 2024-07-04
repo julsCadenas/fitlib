@@ -11,7 +11,7 @@ const Search = ({ setSearchTerm }) => {
         <div className="searchContainer">
                 <input
                     type="text"
-                    placeholder="Search by title..."
+                    placeholder="Search by title"
                     onChange={handleSearchChange} 
                 />
                 {/* <button type="submit">
