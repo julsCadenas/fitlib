@@ -1,12 +1,8 @@
 :root {
     --font: #1e1e1e;
-    /* --bg: white; */
     --bg: #EBE6E0;
     --grn: #096A10;
-    /* --grn: #4C7766; */
     --input: #F5F8EB;
-    /* --input: #d3d3d3; */
-    /* --border: #f0f0f0; */
     --border: #D3D3D3;
 }
 
@@ -16,7 +12,6 @@
     --input: #404040;
     --grn: #26a164;
     --border: #404040;
-    /* --grn: #096A10; */
   }
 
 * {
@@ -64,11 +59,7 @@ body {
     font-size: 48px;
     z-index: 1003;
     backdrop-filter: blur(10px); 
-    /* background-color: var(--bg); */
-    /* background-color: black; */
     border-radius: 32px; 
-    /* width: 1800px; */
-    /* text-align: right; */
 }
 
 /* SIDEBAR CSS */
@@ -112,12 +103,8 @@ body {
 }
 
 .title img {
-    /* color: var(--grn);
-    font-size: 48px; */
-    /* margin-top: 30px;  */
     width: 365px;
     height: auto;
-    /* margin-top: -35px; */
 }
 
 .subtitle {
@@ -191,21 +178,11 @@ body {
     z-index: 1003;
 }
 
-/* .logout {
-    position: absolute;
-    bottom: 0;
-    color: var(--font);
-} */
-
 .bottomBtns {
     position: absolute;
     bottom: 0;
     color: var(--font);
 }
-
-/* .boticon:hover {
-    color: var(--bg);
-} */
 
 @media screen and (max-width: 768px){
     .welcome {
@@ -220,10 +197,8 @@ body {
         width: 300px;
     }
     .title img {
-        /* font-size: 42px; */
         width: 310px;
         height: auto;
-        /* margin-top: -25px; */
     }
     .subtitle {
         width: 300px;
@@ -255,34 +230,23 @@ body {
     height: 550px;
     border: 3px solid var(--border);
     border-radius: 28px;
-    /* margin-top: -20px; */
 }
 
 .loginform {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* width: 100%;  */
-    /* padding: 20px; */
 }
-
-/* .logintitle {
-    font-size: 100px;
-    color: var(--grn);
-} */
 
 .logintitle img {
     width: 750px;
     height: auto;
-    /* margin-top: -140px;     */
-    /* background-color: black; */
 }
 
 .loginsubtitle {
     font-size: 30px;
     font-weight: bold;
     width: 700px;
-    /* margin-top: -190px; */
     margin-bottom: 15px;
     color: var(--font);
 }
@@ -334,12 +298,10 @@ body {
     .logintitle img{
         width: 350px;
         height: auto;
-        /* margin-top: -55px; */
     }
     .loginsubtitle {
         width: 350px;
         font-size: 16px;
-        /* margin-top: -90px; */
     }
     .loginform input {
         width: 270px;
@@ -364,7 +326,6 @@ body {
 
 .elibContainer, .archiveContainer {
     flex: 1 0;
-    /* width: 100%; */
     height: 350px;
     max-height: 350px;
     background-color: var(--bg);
@@ -377,8 +338,6 @@ body {
     font-weight: 600;
     overflow: auto;
     white-space: nowrap;
-    /* flex-wrap: nowrap; */
-    /* overflow: hidden; */
 }
 
 .elibContainer p, .archiveContainer p {
@@ -458,7 +417,6 @@ body {
     }
     .elibbooks ul {
         flex-wrap: nowrap;
-        /* flex-direction: row; */
         overflow-x: auto;
         justify-content: flex-start;
     }
@@ -622,7 +580,6 @@ body {
     max-width: 250px;
     height: auto;
     border-radius: 16px;
-    /* border: 5px solid #D3D3D3;  */
 }
 
 .modalContent {
@@ -636,8 +593,6 @@ body {
     max-width: 300px;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
-    /* text-align: center;  */
 }
 
 .modalauthor,
@@ -657,10 +612,6 @@ body {
     text-align: center; 
     align-self: center;
 }
-
-/* .modalstatus:hover {
-    width: 240px;
-} */
 
 .modalbtn {
     margin-top: 10px;
@@ -709,10 +660,6 @@ body {
     .modalcontainer {
         width: 80%;
         margin-left: 40px;
-        /* transform: translateX(15%); */
-        /* left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%); */
     }
     #bookcover {
         width: 300px;
@@ -722,13 +669,6 @@ body {
 /* SEARCH CSS */
 
 .searchContainer {
-    /* margin-top: 50px; */
-    /* margin-left: 15px; */
-    /* width: 500px;
-    height: 35px;
-    border-radius: 12px;
-    border: 2px solid var(--border);
-    background-color: var(--input); */
     display: flex;
     align-items: center;
     align-self: center;
