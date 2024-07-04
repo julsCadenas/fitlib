@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { auth, firestore, storage } from '../firebase';
-import { doc, setDoc, getDoc, collection, deleteDoc } from "firebase/firestore"; 
+import { doc, setDoc, getDoc, collection, deleteDoc, updateDoc } from "firebase/firestore"; 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons'; 
@@ -26,6 +26,7 @@ const style = {
 const BookDetails = ({ open, handleClose, selectedBook }) => {
     const darkMode = document.querySelector("body").getAttribute('data-theme') === 'Dark';
     const [isFavorite, setIsFavorite] = useState(false);
+    const [isReserved, setIsReserved] = useState(false);
     const storage = getStorage();
 
     const handleDownload = () => {
@@ -60,6 +61,25 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
         }
     }, [open, selectedBook]);
 
+    useEffect(() => {
+        const checkIfReserved = async () => {
+            try {
+                const currentUser = auth.currentUser;
+                if (currentUser && selectedBook) {
+                    const userRef = doc(firestore, 'Users', currentUser.uid);
+                    const bookRef = doc(userRef, 'borrowed', `book${selectedBook.bookID.toString()}`);
+                    const bookDoc = await getDoc(bookRef);
+                    setIsReserved(bookDoc.exists());
+                }
+            } catch (error) {
+                console.error('error:', error);
+            }
+        };
+
+        if (open && selectedBook) {
+            checkIfReserved();
+        }
+    }, [open, selectedBook]);
 
     if (!selectedBook) {
         return null;
@@ -107,6 +127,111 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
         }
     };
 
+    const reserveBook = async () => {
+        try {
+            const currentUser = auth.currentUser;
+            if (currentUser && selectedBook) {
+                if (selectedBook.status === 'unavailable') {
+                    console.log("Book is unavailable, can't reserve");
+                    return; 
+                }
+    
+                const userRef = doc(firestore, 'Users', currentUser.uid);
+                const borrowedCollectionRef = collection(userRef, 'borrowed');
+                const libraryCollectionRef = collection(firestore, 'Library');
+                const historyCollectionRef = collection(firestore, 'ReserveHistory')
+
+                const now = new Date(); 
+                const options = { timeZone: 'Asia/Manila', hour12: false };
+                const reserveDateTime = now.toLocaleString('en-US', options); 
+                
+    
+                await updateDoc(doc(libraryCollectionRef, `book${selectedBook.bookID.toString()}`), {
+                    status: 'reserved',
+                    reserveDateTime: reserveDateTime
+                });
+                
+                await setDoc(doc(borrowedCollectionRef, `book${selectedBook.bookID.toString()}`), {
+                    title: selectedBook.title,
+                    author: selectedBook.author,
+                    class: selectedBook.class,
+                    cover: selectedBook.cover,
+                    status: 'reserved',
+                    bookID: selectedBook.bookID,
+                    reserveDateTime: reserveDateTime 
+                });
+
+                const isoString = now.toISOString();
+                const dateString = isoString.split('T')[0]; 
+                const timeString = isoString.split('T')[1].split('.')[0]; 
+                const documentName = `book${selectedBook.bookID.toString()}_${dateString}_${timeString}`;
+                
+                await setDoc(doc(historyCollectionRef, documentName), {
+                    title: selectedBook.title,
+                    author: selectedBook.author,
+                    class: selectedBook.class,
+                    cover: selectedBook.cover,
+                    status: 'reserved',
+                    bookID: selectedBook.bookID,
+                    reserveDateTime: reserveDateTime 
+                });
+    
+                console.log('reserved book');
+                setIsReserved(true);
+            } else {
+                console.log('user not logged in or book not selected');
+            }
+        } catch (error) {
+            console.error('error:', error);
+        }
+    }
+    
+
+    const unReserveBook = async () => {
+        try {
+            const currentUser = auth.currentUser;
+            if (currentUser) {
+                const userRef = doc(firestore, 'Users', currentUser.uid);
+                const borrowedCollectionRef = collection(userRef, 'borrowed');
+                const historyCollectionRef = collection(firestore, 'ReserveHistory')
+                await deleteDoc(doc(borrowedCollectionRef, `book${selectedBook.bookID.toString()}`));
+
+                const libraryCollectionRef = collection(firestore, 'Library');
+            
+                await updateDoc(doc(libraryCollectionRef, `book${selectedBook.bookID.toString()}`), {
+                    status: 'available'
+                });
+                
+                const now = new Date(); 
+                const options = { timeZone: 'Asia/Manila', hour12: false };
+                const reserveDateTime = now.toLocaleString('en-US', options); 
+                
+                const isoString = now.toISOString();
+                const dateString = isoString.split('T')[0]; 
+                const timeString = isoString.split('T')[1].split('.')[0]; 
+                const documentName = `book${selectedBook.bookID.toString()}_${dateString}_${timeString}`;
+                
+                await setDoc(doc(historyCollectionRef, documentName), {
+                    title: selectedBook.title,
+                    author: selectedBook.author,
+                    class: selectedBook.class,
+                    cover: selectedBook.cover,
+                    status: 'available',
+                    bookID: selectedBook.bookID,
+                    reserveDateTime: reserveDateTime 
+                });
+    
+
+                console.log('removed from reservations');
+                setIsReserved(false);
+            } else {
+                console.log('user not logged in');
+            }
+        } catch (error) {
+            console.error('error:', error);
+        }
+    }
+
     return (
         <Modal
             aria-labelledby="transition-modal-title"
@@ -138,14 +263,17 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                             <strong>Genre:</strong> {selectedBook.class}
                         </Typography>
                         <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 18 }}>
-                            {selectedBook.collection == "elibrary" ? <strong>{selectedBook.status.charAt(0).toUpperCase() + selectedBook.status.slice(1)}</strong>        
+                            {selectedBook.collection == "elibrary" ? 
+                                <a><strong>{selectedBook?.status.charAt(0).toUpperCase() + selectedBook?.status.slice(1)}</strong></a>        
                                 : isFavorite ? <a onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 240, borderRadius: 10 }} ><strong>Remove from Favorites</strong></a> 
                                 : <a onClick={addToFavorites}><strong>Add to Favorites</strong></a>
                             }
                         </Typography>
                         {selectedBook.collection == "elibrary" ? 
                             <div className='twobtncontainer'>
-                                <button className='modalbtn' id='reservebtn'><strong>RESERVE</strong></button>
+                                { isReserved || selectedBook?.status === 'reserved' ? <button className='modalbtn' id='reservebtn' onClick={unReserveBook} style={{ backgroundColor: '#D0312D', color: '#EBE6E0' }} ><strong>CANCEL</strong></button>
+                                    : <button className='modalbtn' id='reservebtn' onClick={reserveBook} disabled={selectedBook?.status === 'unavailable'}><strong>RESERVE</strong></button>
+                                }
                                 <span className='heartbtn'>
                                     { isFavorite ?  
                                         <a className='heartbtnbtn' onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 40, height: 35, borderRadius: 8 }}><FontAwesomeIcon className='hearticon' icon={faHeartBroken} /></a>
