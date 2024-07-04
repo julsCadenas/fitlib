@@ -7,6 +7,8 @@ import Typography from '@mui/material/Typography';
 import { auth, firestore, storage } from '../firebase';
 import { doc, setDoc, getDoc, collection, deleteDoc } from "firebase/firestore"; 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons'; 
 
 const style = {
     position: 'absolute',
@@ -133,17 +135,24 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                             <strong>Author:</strong> {selectedBook.author}
                         </Typography>
                         <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5 }}>
-                            <strong>Program:</strong> {selectedBook.class}
+                            <strong>Genre:</strong> {selectedBook.class}
                         </Typography>
                         <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 18 }}>
-                            {selectedBook.collection == "elibrary" ?
-                                isFavorite ? <a onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 240, borderRadius: 10 }} ><strong>Remove from Favorites</strong></a> 
-                                : <strong>{selectedBook.status.charAt(0).toUpperCase() + selectedBook.status.slice(1)}</strong>
+                            {selectedBook.collection == "elibrary" ? <strong>{selectedBook.status.charAt(0).toUpperCase() + selectedBook.status.slice(1)}</strong>        
+                                : isFavorite ? <a onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 240, borderRadius: 10 }} ><strong>Remove from Favorites</strong></a> 
                                 : <a onClick={addToFavorites}><strong>Add to Favorites</strong></a>
                             }
                         </Typography>
                         {selectedBook.collection == "elibrary" ? 
-                            <button className='modalbtn' onClick={handleDownload}><strong>RESERVE</strong></button>
+                            <div className='twobtncontainer'>
+                                <button className='modalbtn' id='reservebtn'><strong>RESERVE</strong></button>
+                                <span className='heartbtn'>
+                                    { isFavorite ?  
+                                        <a className='heartbtnbtn' onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 40, height: 35, borderRadius: 8 }}><FontAwesomeIcon className='hearticon' icon={faHeartBroken} /></a>
+                                        : <a className='heartbtnbtn' onClick={addToFavorites}><FontAwesomeIcon className='hearticon' icon={faHeart} /></a>
+                                    }
+                                </span>
+                            </div>
                             : <button className='modalbtn' onClick={handleDownload}><strong>OPEN</strong></button>
                         }
 
@@ -155,3 +164,11 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
 };
 
 export default BookDetails;
+
+
+
+// {selectedBook.collection == "elibrary" ?
+//     isFavorite ? <a onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 240, borderRadius: 10 }} ><strong>Remove from Favorites</strong></a> 
+//     : <strong>{selectedBook.status.charAt(0).toUpperCase() + selectedBook.status.slice(1)}</strong>
+//     : <a onClick={addToFavorites}><strong>Add to Favorites</strong></a>
+// }

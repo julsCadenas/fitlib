@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faBook, faFileAlt, faDatabase, faSignOutAlt, faMoon, faSun, faUserCog } from '@fortawesome/free-solid-svg-icons'; // Import faUserCog for admin icon
+import { faSearch, faBook, faFileAlt, faDatabase, faSignOutAlt, faMoon, faSun, faUserCog } from '@fortawesome/free-solid-svg-icons'; 
 import '../styles/App.css';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../images/fitlib.png'
