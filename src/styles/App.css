@@ -29,7 +29,7 @@
 }
   
 ::-webkit-scrollbar-thumb {
-    background: var(--input);
+    background: var(--border);
     border-radius: 16px;
 }
   
@@ -445,7 +445,6 @@ body {
     }
 }
 
-
 @media screen and (max-width: 344px) {
     .welcome {
         font-size: 22px;
@@ -525,6 +524,7 @@ body {
 .booktitle {
     font-family: 'Prompt';
     font-size: 16px;
+    color: var(--font);
 }
 
 .searchFilterContainer {
@@ -730,21 +730,10 @@ body {
     font-family: 'Prompt';
 }
 
-/* .searchContainer button {
-    border: none;
-    background-color: transparent;
-    color: var(--font);
-    font-size: 18px;
-    align-self: center;
-} */
-
 @media screen and (max-width: 800px) {
     .searchContainer input {
         width: 200px;
         height: 30px;
         font-size: 11px;
     }
-    /* .searchContainer button {
-        font-size: 15px;    
-    } */
 }
