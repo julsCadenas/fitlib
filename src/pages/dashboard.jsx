@@ -6,6 +6,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/authContext'
 import Login from './login';
+import BookModal from '../components/bookdetails';
 
 const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -18,7 +19,27 @@ const shuffleArray = (array) => {
 const Dashboard = () => {
     const [books, setBooks] = useState([]);
     const [books2, setBooks2] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [selectedBook, setSelectedBook] = useState(null);
     const { userLoggedIn } = useAuth(); 
+
+    const handleOpen = (book) => {
+        setSelectedBook(book);
+        setOpen(true);
+    };
+
+    const handleClose = () => setOpen(false);
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            const booksCollection = collection(db, 'Library');
+            const booksSnapshot = await getDocs(booksCollection);
+            const booksList = booksSnapshot.docs.map(doc => doc.data());
+            setBooks(booksList);
+        };
+
+        fetchBooks();
+    }, []); 
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -57,7 +78,7 @@ const Dashboard = () => {
                         <div className='elibbooks'>
                             <ul>
                             {books2.map((book, index) => (
-                                <li key={index} className='bookItem'>
+                                <li key={index} className='bookItem' onClick={() => handleOpen(book)}>
                                     <img src={book.cover} alt={`${book.title}`} />
                                 </li>
                             ))}
@@ -70,7 +91,7 @@ const Dashboard = () => {
                         <div className='elibbooks'>
                             <ul>
                             {books.map((book, index) => (
-                                <li key={index} className='bookItem'>
+                                <li key={index} className='bookItem' onClick={() => handleOpen(book)}>
                                     <img src={book.cover} alt={`${book.title}`} />
                                 </li>
                             ))}
@@ -78,6 +99,11 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
+                <BookModal
+                        open={open}
+                        handleClose={handleClose}
+                        selectedBook={selectedBook}
+                />
             </>
             :
             <Login />
