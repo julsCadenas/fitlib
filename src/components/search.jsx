@@ -1,6 +1,4 @@
 import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSearch } from '@fortawesome/free-solid-svg-icons'; 
 
 const Search = ({ setSearchTerm }) => {
     const handleSearchChange = (e) => {
@@ -14,9 +12,6 @@ const Search = ({ setSearchTerm }) => {
                     placeholder="Search for books by genre, title, or author"
                     onChange={handleSearchChange} 
                 />
-                {/* <button type="submit">
-                    <FontAwesomeIcon icon={faSearch} />
-                </button> */}
         </div>
     );
 };

@@ -527,6 +527,51 @@ body {
     font-size: 16px;
 }
 
+.searchFilterContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px; 
+}
+
+.filterbar {
+    max-width: 70px;
+    max-height: 40px;
+    width: 100%;
+    height: 40px;
+}
+
+.filterbar select {
+    background-color: var(--input);
+    color: var(--font);
+    border: 2px solid var(--border);
+    font-family: 'Prompt';
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    padding: 5px;
+    margin-top: -4.5px;
+}
+
+.dropdown option {
+    background-color: var(--bg);
+    border: 2px solid var(--border);
+    font-family: 'Prompt';
+    font-weight: 600;
+    color: var(--font);
+}
+
+@media (max-width: 800px){
+    .filterbar {
+        width: 65px;
+        height: 35px;
+    }
+    .filterbar select {
+        font-size: 11px;
+    }
+}
+
 @media (max-width: 768px) {
     .ebooksContainer {
         margin-top: 75px;
@@ -539,7 +584,6 @@ body {
         max-width: 200px; 
         text-align: center;
     }
-
     .ebookscase ul {
         display: flex;
         flex-wrap: wrap;
@@ -696,8 +740,8 @@ body {
 
 @media screen and (max-width: 800px) {
     .searchContainer input {
-        width: 250px;
-        height: 25px;
+        width: 200px;
+        height: 30px;
         font-size: 11px;
     }
     /* .searchContainer button {

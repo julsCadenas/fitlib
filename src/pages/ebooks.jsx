@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import Header from '../components/header';
 import SideBar from '../components/sidebar';
 import Search from '../components/search';
@@ -14,6 +14,7 @@ const Ebooks = () => {
     const [open, setOpen] = useState(false);
     const [selectedBook, setSelectedBook] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedClass, setSelectedClass] = useState('');
 
     const handleOpen = (book) => {
         setSelectedBook(book);
@@ -33,11 +34,20 @@ const Ebooks = () => {
         fetchBooks();
     }, []); 
 
-    const filteredBooks = books.filter(book => 
-        (book.title && book.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (book.author && book.author.toLowerCase().includes(searchTerm.toLowerCase())) ||
-        (book.class && book.class.toLowerCase().includes(searchTerm.toLowerCase()))
-    );
+    const handleClassChange = (event) => {
+        setSelectedClass(event.target.value);
+    };
+
+    const filteredBooks = books.filter(book => {
+        const matchesSearchTerm =
+            (book.title && book.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (book.author && book.author.toLowerCase().includes(searchTerm.toLowerCase())) ||
+            (book.class && book.class.toLowerCase().includes(searchTerm.toLowerCase()))
+
+        const matchesClass = selectedClass ? book.class === selectedClass : true;
+
+        return matchesSearchTerm && matchesClass;
+    });
 
     return (
         <>
@@ -47,7 +57,18 @@ const Ebooks = () => {
                     <SideBar />
                     <div className='ebooksContainer'>
                         <p className='eBooks'><strong>eBooks</strong></p>
-                        <Search setSearchTerm={setSearchTerm} /> 
+                        <div className='searchFilterContainer'>
+                            <Search setSearchTerm={setSearchTerm} /> 
+                            <span className='filterbar'>
+                                <select className='dropdown' value={selectedClass} onChange={handleClassChange}>
+                                    <option value="">Filter</option>
+                                    <option value="CPE">CPE</option>
+                                    <option value="CS">CS</option>
+                                    <option value="EE">EE</option>
+                                    <option value="BIO">BIO</option>
+                                </select>
+                            </span>
+                        </div>
                         <div className='ebookscase' id='ebooks2'>
                             <ul>
                                 {filteredBooks.map((book, index) => (
