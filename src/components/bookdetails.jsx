@@ -137,9 +137,11 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                 }
     
                 const userRef = doc(firestore, 'Users', currentUser.uid);
+                const bookRef = doc(firestore, 'Library', `book${selectedBook.bookID.toString()}`);
                 const borrowedCollectionRef = collection(userRef, 'borrowed');
                 const libraryCollectionRef = collection(firestore, 'Library');
                 const historyCollectionRef = collection(firestore, 'ReserveHistory');
+                const bookCollectionRef = collection(bookRef, 'BookReserveHistory');
     
                 const now = new Date();
                 const returnDate = new Date();
@@ -181,7 +183,18 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     reserveDateTime: reserveDateTime,
                     returnDateTime: returnDateTime 
                 });
-    
+                
+                await setDoc(doc(bookCollectionRef, documentName), {
+                    title: selectedBook.title,
+                    author: selectedBook.author,
+                    class: selectedBook.class,
+                    cover: selectedBook.cover,
+                    status: 'reserved',
+                    bookID: selectedBook.bookID,
+                    reserveDateTime: reserveDateTime,
+                    returnDateTime: returnDateTime 
+                });
+
                 console.log('reserved book');
                 setIsReserved(true);
             } else {
@@ -200,6 +213,8 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                 const userRef = doc(firestore, 'Users', currentUser.uid);
                 const borrowedCollectionRef = collection(userRef, 'borrowed');
                 const historyCollectionRef = collection(firestore, 'ReserveHistory')
+                const bookRef = doc(firestore, 'Library', `book${selectedBook.bookID.toString()}`);
+                const bookCollectionRef = collection(bookRef, 'BookReserveHistory');
                 await deleteDoc(doc(borrowedCollectionRef, `book${selectedBook.bookID.toString()}`));
 
                 const libraryCollectionRef = collection(firestore, 'Library');
@@ -226,7 +241,16 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     bookID: selectedBook.bookID,
                     reserveDateTime: reserveDateTime 
                 });
-    
+                
+                await setDoc(doc(bookCollectionRef, documentName), {
+                    title: selectedBook.title,
+                    author: selectedBook.author,
+                    class: selectedBook.class,
+                    cover: selectedBook.cover,
+                    status: 'available',
+                    bookID: selectedBook.bookID,
+                    reserveDateTime: reserveDateTime 
+                });
 
                 console.log('removed from reservations');
                 setIsReserved(false);
