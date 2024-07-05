@@ -57,7 +57,7 @@ const Ebooks = () => {
                     <Header />
                     <SideBar />
                     <div className='ebooksContainer'>
-                        <p className='eBooks'><strong>eBooks</strong></p>
+                        <p className='eBooks'><strong>eLibrary</strong></p>
                         <div className='searchFilterContainer'>
                             <Search setSearchTerm={setSearchTerm} /> 
                             <span className='filterbar'>
