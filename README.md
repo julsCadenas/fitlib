@@ -22,7 +22,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-
 ## Accounts for the public:
 1. **username:** public1@try.com 
    **pw:**       password
