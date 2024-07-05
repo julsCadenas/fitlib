@@ -36,7 +36,7 @@ const Ebooks = () => {
 
     const handleClassChange = (event) => {
         setSelectedClass(event.target.value);
-    };
+    };  
 
     const filteredBooks = books.filter(book => {
         const matchesSearchTerm =
