@@ -686,20 +686,21 @@ body {
     font-family: 'Prompt';
 }
 
-.searchContainer button {
+/* .searchContainer button {
     border: none;
     background-color: transparent;
     color: var(--font);
     font-size: 18px;
     align-self: center;
-}
+} */
 
 @media screen and (max-width: 800px) {
     .searchContainer input {
         width: 250px;
         height: 25px;
+        font-size: 11px;
     }
-    .searchContainer button {
-        font-size: 15px;
-    }
+    /* .searchContainer button {
+        font-size: 15px;    
+    } */
 }

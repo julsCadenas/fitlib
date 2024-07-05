@@ -34,7 +34,9 @@ const Ebooks = () => {
     }, []); 
 
     const filteredBooks = books.filter(book => 
-        book.title && book.title.toLowerCase().includes(searchTerm.toLowerCase())
+        (book.title && book.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (book.author && book.author.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (book.class && book.class.toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
     return (
