@@ -139,18 +139,22 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                 const userRef = doc(firestore, 'Users', currentUser.uid);
                 const borrowedCollectionRef = collection(userRef, 'borrowed');
                 const libraryCollectionRef = collection(firestore, 'Library');
-                const historyCollectionRef = collection(firestore, 'ReserveHistory')
-
-                const now = new Date(); 
+                const historyCollectionRef = collection(firestore, 'ReserveHistory');
+    
+                const now = new Date();
+                const returnDate = new Date();
+                returnDate.setDate(now.getDate() + 2); 
+    
                 const options = { timeZone: 'Asia/Manila', hour12: false };
                 const reserveDateTime = now.toLocaleString('en-US', options); 
-                
+                const returnDateTime = returnDate.toLocaleString('en-US', options);
     
                 await updateDoc(doc(libraryCollectionRef, `book${selectedBook.bookID.toString()}`), {
                     status: 'reserved',
-                    reserveDateTime: reserveDateTime
+                    reserveDateTime: reserveDateTime,
+                    returnDateTime: returnDateTime 
                 });
-                
+    
                 await setDoc(doc(borrowedCollectionRef, `book${selectedBook.bookID.toString()}`), {
                     title: selectedBook.title,
                     author: selectedBook.author,
@@ -158,9 +162,10 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     cover: selectedBook.cover,
                     status: 'reserved',
                     bookID: selectedBook.bookID,
-                    reserveDateTime: reserveDateTime 
+                    reserveDateTime: reserveDateTime,
+                    returnDateTime: returnDateTime 
                 });
-
+    
                 const isoString = now.toISOString();
                 const dateString = isoString.split('T')[0]; 
                 const timeString = isoString.split('T')[1].split('.')[0]; 
@@ -173,7 +178,8 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     cover: selectedBook.cover,
                     status: 'reserved',
                     bookID: selectedBook.bookID,
-                    reserveDateTime: reserveDateTime 
+                    reserveDateTime: reserveDateTime,
+                    returnDateTime: returnDateTime 
                 });
     
                 console.log('reserved book');
