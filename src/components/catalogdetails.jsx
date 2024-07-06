@@ -7,8 +7,6 @@ import Typography from '@mui/material/Typography';
 import { auth, firestore, storage } from '../firebase';
 import { doc, setDoc, getDoc, collection, deleteDoc, updateDoc } from "firebase/firestore"; 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons'; 
 
 const style = {
     position: 'absolute',

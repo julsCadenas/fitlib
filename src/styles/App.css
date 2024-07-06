@@ -780,6 +780,7 @@ body {
 .profilename, .profilenum, .profileprog {
     margin-top: -10px;
     font-size: 18px;
+    color: var(--font);
 }
 
 .favcontainer, .borrowcontainer {
@@ -833,4 +834,47 @@ body {
     .catalogcontainer {
         margin-top: 200px;
     }
+}
+
+/* ADMIN PAGE CSS */
+
+.admincontainer {
+    margin-top: 1000px;
+}
+
+.elibraryadmin {
+    /* margin: 20px;  */
+}
+
+.elibraryadmin p {
+    margin-bottom: 10px; 
+    color: var(--grn);
+    font-size: 28px;
+}
+
+.elibraryadmin table {
+    width: 100%;
+    border: 3px solid var(--border);
+    border-collapse: collapse; 
+    color: var(--font);
+}
+
+.elibraryadmin th,
+.elibraryadmin td {
+    border: 3px solid var(--border); 
+    padding: 8px; 
+}
+
+.elibraryadmin button {
+    background-color: var(--bg);
+    border: 2px solid var(--grn);
+    color: var(--grn);
+    border-radius: 6px;
+    font-family: 'Prompt';
+    font-size: 18px;
+}
+
+.elibraryadmin button:hover {
+    background-color: var(--grn);
+    color: var(--bg);
 }
