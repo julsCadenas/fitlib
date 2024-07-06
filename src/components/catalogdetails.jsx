@@ -23,10 +23,21 @@ const style = {
     p: 4,
 };
 
-const CatalogDetails = () => {
+const CatalogDetails = ({ open, handleClose, selectedBook }) => {
     const darkMode = document.querySelector("body").getAttribute('data-theme') === 'Dark';
     const [isFavorite, setIsFavorite] = useState(false);
     const storage = getStorage();
+
+    const handleDownload = () => {
+        try {
+            const url = getDownloadURL(ref(storage, `bookfiles/${selectedBook?.title}.pdf`)).then(url=>{
+                window.open(url,'_blank')
+            });
+
+        } catch (error) {
+            console.error('Error fetching file URL:', error.code, error.message);
+        }
+    };
 
     useEffect(() => {
         const checkIfFavorite = async () => {
@@ -48,6 +59,10 @@ const CatalogDetails = () => {
         }
     }, [open, selectedBook]);
 
+    if (!selectedBook) {
+        return null;
+    }
+
     const addToFavorites = async () => {
         try {
             const currentUser = auth.currentUser;
@@ -61,6 +76,7 @@ const CatalogDetails = () => {
                     class: selectedBook.class,
                     cover: selectedBook.cover,
                     status: selectedBook.status,
+                    collection: selectedBook.collection,
                     bookID: selectedBook.bookID,
                 });
                 console.log('added to favorites');
@@ -123,22 +139,37 @@ const CatalogDetails = () => {
                             style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5 }}>
                             <strong>Genre:</strong> {selectedBook.class}
                         </Typography>
+                        { selectedBook.collection == "elibrary" ?
+                            <>
+                                <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} 
+                                    style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5 }}>
+                                    <strong>Reserved:</strong> {selectedBook.reserveDateTime}
+                                </Typography>
+                                <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} 
+                                    style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5 }}>
+                                    <strong>Return by:</strong> {selectedBook.returnDateTime}
+                                </Typography>
+                            </>
+                            : <></>
+                        }   
                         <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} 
                             style={{ fontFamily: 'Prompt', fontSize: 18 }}>
                             {selectedBook.collection == "elibrary" ? 
                                 <a><strong>{selectedBook?.status.charAt(0).toUpperCase() + selectedBook?.status.slice(1)}</strong></a>        
-                                : isFavorite ? <a onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 240, borderRadius: 10 }} ><strong>Remove from Favorites</strong></a> 
+                                : isFavorite ? <a onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 240, borderRadius: 10 }}>
+                                    <strong>Remove from Favorites</strong>
+                                    </a> 
                                 : <a onClick={addToFavorites}><strong>Add to Favorites</strong></a>
                             }
                         </Typography>
                         {selectedBook.collection == "elibrary" ? 
                             <div className='twobtncontainer'>
-                                { isReserved || selectedBook?.status === 'reserved' ? <button className='modalbtn' id='reservebtn'
+                                {/* { isReserved || selectedBook?.status === 'reserved' ? <button className='modalbtn' id='reservebtn'
                                     style={{ backgroundColor: '#D0312D', color: '#EBE6E0' }} ><strong>CANCEL</strong></button>
                                     :   <button className='modalbtn' id='reservebtn' disabled={selectedBook?.status === 'unavailable'}>
                                             <strong>RESERVE</strong>
                                         </button>
-                                }
+                                } */}
                                 {/* <span className='heartbtn'>
                                     { isFavorite ?  
                                         <a className='heartbtnbtn' onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 40, height: 35, borderRadius: 8 }}>

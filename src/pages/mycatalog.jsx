@@ -6,7 +6,7 @@ import { getAuth } from "firebase/auth";
 import React, { useState, useEffect } from 'react';
 import db from '../firebase';
 import { collection, doc, getDoc, docs, getDocs } from "firebase/firestore";
-import BookModal from '../components/bookdetails';
+import BookModal from '../components/catalogdetails';
 
 const MyCatalog = () => {
     const { userLoggedIn } = useAuth();
@@ -86,7 +86,7 @@ const MyCatalog = () => {
                         </div>
                         )}
                         <div className='favcontainer'>
-                            <p><strong>Favorites</strong></p>
+                            <p className='favtitle'><strong>Favorites</strong></p>
                             <ul>
                             {faves && faves.map((fave, index) => (
                                 <li key={index}>
@@ -96,7 +96,7 @@ const MyCatalog = () => {
                             </ul>
                         </div>
                         <div className='borrowcontainer'>
-                            <p><strong>Borrowed Books</strong></p>
+                            <p className='borrowtitle'><strong>Borrowed Books</strong></p>
                             <ul>
                             {borrow && borrow.map((bor, index) => (
                                 <li key={index}>
