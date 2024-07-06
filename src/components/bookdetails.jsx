@@ -97,6 +97,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     author: selectedBook.author,
                     class: selectedBook.class,
                     cover: selectedBook.cover,
+                    collection: selectedBook.collection,
                     status: selectedBook.status,
                     bookID: selectedBook.bookID,
                 });
@@ -161,6 +162,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     title: selectedBook.title,
                     author: selectedBook.author,
                     class: selectedBook.class,
+                    collection: selectedBook.collection,
                     cover: selectedBook.cover,
                     status: 'reserved',
                     bookID: selectedBook.bookID,
@@ -177,6 +179,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     title: selectedBook.title,
                     author: selectedBook.author,
                     class: selectedBook.class,
+                    collection: selectedBook.collection,
                     cover: selectedBook.cover,
                     status: 'reserved',
                     bookID: selectedBook.bookID,
@@ -189,6 +192,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     author: selectedBook.author,
                     class: selectedBook.class,
                     cover: selectedBook.cover,
+                    collection: selectedBook.collection,
                     status: 'reserved',
                     bookID: selectedBook.bookID,
                     reserveDateTime: reserveDateTime,
@@ -237,6 +241,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     author: selectedBook.author,
                     class: selectedBook.class,
                     cover: selectedBook.cover,
+                    collection: selectedBook.collection,
                     status: 'available',
                     bookID: selectedBook.bookID,
                     reserveDateTime: reserveDateTime 
@@ -246,6 +251,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     title: selectedBook.title,
                     author: selectedBook.author,
                     class: selectedBook.class,
+                    collection: selectedBook.collection,
                     cover: selectedBook.cover,
                     status: 'available',
                     bookID: selectedBook.bookID,
@@ -283,16 +289,20 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                 }} className="modalContent">
                     <img src={selectedBook.cover} alt={selectedBook.title} id='bookcover' />
                     <div className="textContent">
-                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" style={{ fontFamily: 'Prompt', fontWeight: 'bold', fontSize: 18 }}>
+                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                            style={{ fontFamily: 'Prompt', fontWeight: 'bold', fontSize: 18 }}>
                             {selectedBook.title}
                         </Typography>
-                        <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 16 }}>
+                        <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} 
+                            style={{ fontFamily: 'Prompt', fontSize: 16 }}>
                             <strong>Author:</strong> {selectedBook.author}
                         </Typography>
-                        <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5 }}>
+                        <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} 
+                            style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5 }}>
                             <strong>Genre:</strong> {selectedBook.class}
                         </Typography>
-                        <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} style={{ fontFamily: 'Prompt', fontSize: 18 }}>
+                        <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} 
+                            style={{ fontFamily: 'Prompt', fontSize: 18 }}>
                             {selectedBook.collection == "elibrary" ? 
                                 <a><strong>{selectedBook?.status.charAt(0).toUpperCase() + selectedBook?.status.slice(1)}</strong></a>        
                                 : isFavorite ? <a onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 240, borderRadius: 10 }} ><strong>Remove from Favorites</strong></a> 
@@ -301,12 +311,17 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                         </Typography>
                         {selectedBook.collection == "elibrary" ? 
                             <div className='twobtncontainer'>
-                                { isReserved || selectedBook?.status === 'reserved' ? <button className='modalbtn' id='reservebtn' onClick={unReserveBook} style={{ backgroundColor: '#D0312D', color: '#EBE6E0' }} ><strong>CANCEL</strong></button>
-                                    : <button className='modalbtn' id='reservebtn' onClick={reserveBook} disabled={selectedBook?.status === 'unavailable'}><strong>RESERVE</strong></button>
+                                { isReserved || selectedBook?.status === 'reserved' ? <button className='modalbtn' id='reservebtn' onClick={unReserveBook} 
+                                    style={{ backgroundColor: '#D0312D', color: '#EBE6E0' }} ><strong>CANCEL</strong></button>
+                                    :   <button className='modalbtn' id='reservebtn' onClick={reserveBook} disabled={selectedBook?.status === 'unavailable'}>
+                                            <strong>RESERVE</strong>
+                                        </button>
                                 }
                                 <span className='heartbtn'>
                                     { isFavorite ?  
-                                        <a className='heartbtnbtn' onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 40, height: 35, borderRadius: 8 }}><FontAwesomeIcon className='hearticon' icon={faHeartBroken} /></a>
+                                        <a className='heartbtnbtn' onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 40, height: 35, borderRadius: 8 }}>
+                                            <FontAwesomeIcon className='hearticon' icon={faHeartBroken} />
+                                        </a>
                                         : <a className='heartbtnbtn' onClick={addToFavorites}><FontAwesomeIcon className='hearticon' icon={faHeart} /></a>
                                     }
                                 </span>
@@ -322,11 +337,3 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
 };
 
 export default BookDetails;
-
-
-
-// {selectedBook.collection == "elibrary" ?
-//     isFavorite ? <a onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 240, borderRadius: 10 }} ><strong>Remove from Favorites</strong></a> 
-//     : <strong>{selectedBook.status.charAt(0).toUpperCase() + selectedBook.status.slice(1)}</strong>
-//     : <a onClick={addToFavorites}><strong>Add to Favorites</strong></a>
-// }

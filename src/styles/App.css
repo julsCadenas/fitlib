@@ -737,3 +737,29 @@ body {
         font-size: 11px;
     }
 }
+
+.catalogcontainer {
+    max-width: 1600px;
+    border: 5px solid var(--border);
+    border-radius: 28px 10px 12px 28px;
+
+}
+
+.profiletitle {
+    color: var(--grn);
+    font-size:  32px;
+}
+
+.favcontainer {
+    
+}
+
+.favcontainer img {
+    width: 100px;
+    height: auto;
+}
+
+.borrowcontainer img {
+    width: 100px;
+    height: auto;
+}
