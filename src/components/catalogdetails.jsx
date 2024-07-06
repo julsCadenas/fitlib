@@ -163,23 +163,7 @@ const CatalogDetails = ({ open, handleClose, selectedBook }) => {
                             }
                         </Typography>
                         {selectedBook.collection == "elibrary" ? 
-                            <div className='twobtncontainer'>
-                                {/* { isReserved || selectedBook?.status === 'reserved' ? <button className='modalbtn' id='reservebtn'
-                                    style={{ backgroundColor: '#D0312D', color: '#EBE6E0' }} ><strong>CANCEL</strong></button>
-                                    :   <button className='modalbtn' id='reservebtn' disabled={selectedBook?.status === 'unavailable'}>
-                                            <strong>RESERVE</strong>
-                                        </button>
-                                } */}
-                                {/* <span className='heartbtn'>
-                                    { isFavorite ?  
-                                        <a className='heartbtnbtn' onClick={removeFromFavorites} style={{ backgroundColor: '#D0312D', width: 40, height: 35, borderRadius: 8 }}>
-                                            <FontAwesomeIcon className='hearticon' icon={faHeartBroken} />
-                                        </a>
-                                        : <a className='heartbtnbtn' onClick={addToFavorites}><FontAwesomeIcon className='hearticon' icon={faHeart} /></a>
-                                    }
-                                </span> */}
-                            </div>
-                            : <button className='modalbtn' onClick={handleDownload}><strong>OPEN</strong></button>
+                            <></> : <button className='modalbtn' onClick={handleDownload}><strong>OPEN</strong></button>
                         }
 
                     </div>

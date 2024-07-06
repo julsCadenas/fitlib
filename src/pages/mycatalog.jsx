@@ -70,6 +70,7 @@ const MyCatalog = () => {
         <>
             {userLoggedIn ? (
                 <>
+                    <Header />
                     <SideBar />
                     <div className='catalogcontainer'>
                         {profile && (
