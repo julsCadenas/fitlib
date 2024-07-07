@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
 import db from '../firebase';
 
 const AddBookModal = ({ open, handleClose }) => {
@@ -8,6 +8,7 @@ const AddBookModal = ({ open, handleClose }) => {
     const [author, setAuthor] = useState('');
     const [bookClass, setBookClass] = useState('');
     const [cover, setCover] = useState('');
+    const [bookCollection, setBookCollection] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,14 +19,23 @@ const AddBookModal = ({ open, handleClose }) => {
             author,
             class: bookClass,
             cover,
+            collection: bookCollection,
         };
 
         try {
-            const docRef = await addDoc(collection(db, 'Library'), bookData);
-            console.log("Document written with ID: ", docRef.id);
+            const collectionRef = collection(db, 'Library');
+
+            await setDoc(doc(collectionRef, `book${bookID.toString()}`), {
+                bookID,
+                title,
+                author,
+                class: bookClass,
+                cover,
+                collection: bookCollection,
+            });
             handleClose();
-        } catch (e) {
-            console.error("Error adding document: ", e);
+        } catch (error) {
+            console.error("Error adding document: ", error);
         }
     };
 
@@ -57,6 +67,12 @@ const AddBookModal = ({ open, handleClose }) => {
                             <label htmlFor="class"><strong>Class: </strong></label>
                         </div>
                         <input type="text" id="class" value={bookClass} onChange={(e) => setBookClass(e.target.value)} required />
+                    </div>
+                    <div className="form-group">
+                        <div className='label'>
+                            <label htmlFor="collection"><strong>Collection: </strong></label>
+                        </div>
+                        <input type="text" id="collection" value={bookCollection} onChange={(e) => setBookCollection(e.target.value)} required />
                     </div>
                     <div className="form-group">
                         <div className='label'>
