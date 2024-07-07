@@ -6,7 +6,7 @@ import React, { useState, useEffect } from 'react';
 import db from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import ElibModal from '../components/admindetails'; 
-import AddBookModal from '../components/addbook'; 
+import AddPdfModal from '../components/addpdf'; 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 const EbookAdmin = () => {
@@ -58,7 +58,7 @@ const EbookAdmin = () => {
                 <div className='admincontainer'>
                     <div className='bookstablecontainer'>
                         <div className='elibraryadmin'>
-                            <p><strong>eLibrary</strong></p>
+                            <p><strong>eBooks</strong></p>
                             <table>
                                 <thead>
                                     <tr>
@@ -66,7 +66,7 @@ const EbookAdmin = () => {
                                         <th>Title</th>
                                         <th>Author</th>
                                         <th>Class</th>
-                                        <th>Status</th>
+                                        {/* <th>Status</th> */}
                                         <th>Details</th>
                                     </tr>
                                 </thead>
@@ -77,7 +77,7 @@ const EbookAdmin = () => {
                                             <td>{book.title}</td>
                                             <td>{book.author}</td>
                                             <td>{book.class}</td>
-                                            <td>{book.status}</td>
+                                            {/* <td>{book.status}</td> */}
                                             <td>
                                                 <button onClick={() => handleOpenDetails(book)}>
                                                     <strong>Details</strong>
@@ -96,7 +96,7 @@ const EbookAdmin = () => {
                     handleClose={handleCloseDetails}
                     selectedBook={selectedBook}
                 />
-                <AddBookModal
+                <AddPdfModal
                     open={openAddBook}
                     handleClose={handleCloseAddBook}
                 />

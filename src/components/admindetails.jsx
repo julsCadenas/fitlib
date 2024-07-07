@@ -102,21 +102,31 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                 const bookRef = doc(db, 'Library', `book${selectedBook.bookID.toString()}`);
                 console.log(`Attempting to delete Firestore document: book${selectedBook.bookID.toString()}`);
                 
-                const imageRef = ref(storage, `covers/book${selectedBook.bookID.toString()}.jpg` || `covers/book${selectedBook.bookID.toString()}.png` );
+                const imageRef = ref(storage, `covers/book${selectedBook.bookID.toString()}.jpg` || `covers/book${selectedBook.bookID.toString()}.png`);
                 console.log(`Attempting to delete image from Firebase Storage: covers/book${selectedBook.bookID.toString()}`);
+    
+                if (selectedBook.collection === 'ebooks') {
+                    const pdfRef = ref(storage, `bookfiles/${selectedBook.title}.pdf`);
+                    await deleteObject(pdfRef);
+                    console.log('PDF deleted from Firebase Storage');
 
-                await deleteDoc(bookRef);
-                console.log('Book deleted from Firestore');
-
+                    const eBookRef = doc(db, 'Books', `book${selectedBook.bookID.toString()}`);
+                    await deleteDoc(eBookRef)
+                } else {
+                    await deleteDoc(bookRef)
+                }
+    
                 await deleteObject(imageRef);
                 console.log('Image deleted from Firebase Storage');
-
+    
                 handleClose(); 
             } catch (error) {
                 console.error('Error deleting book or image:', error);
             }
         }
     };
+    
+    
 
     useEffect(() => {
         if (selectedBook) {

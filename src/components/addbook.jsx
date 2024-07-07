@@ -86,7 +86,7 @@ const AddBookModal = ({ open, handleClose }) => {
                         <div className='label'>
                             <label htmlFor="cover"><strong>Cover: </strong></label>
                         </div>
-                        <input type="file" id="cover" onChange={handleFileUpload} accept="image/*" />
+                        <input className='coverupload' type="file" id="cover" onChange={handleFileUpload} accept="image/*" />
                         {cover && (
                             <img src={cover} alt="Cover Preview" style={{ maxWidth: '100%', marginTop: '10px' }} />
                         )}
