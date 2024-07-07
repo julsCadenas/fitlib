@@ -4,9 +4,11 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { auth, firestore, storage } from '../firebase';
-import { doc, getDoc, getDocs, collection } from "firebase/firestore"; 
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { doc, getDoc, getDocs, collection, updateDoc } from "firebase/firestore"; 
+import { ref, getDownloadURL } from "firebase/storage";
 import db from '../firebase';
 
 const style = {
@@ -28,6 +30,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
     const darkMode = document.querySelector("body").getAttribute('data-theme') === 'Dark';
     const [isReserved, setIsReserved] = useState(false);
     const [bookData, setBookData] = useState([]);
+    const [status, setStatus] = useState('');
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -79,6 +82,26 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
         }
     };
 
+    const handleStatusChange = async (event) => {
+        const newStatus = event.target.value;
+        setStatus(newStatus);
+        if (selectedBook) {
+            try {
+                const bookRef = doc(db, 'Library', `book${selectedBook.bookID.toString()}`);
+                await updateDoc(bookRef, { status: newStatus });
+                console.log('Book status updated to:', newStatus);
+            } catch (error) {
+                console.error('Error updating book status:', error);
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (selectedBook) {
+            setStatus(selectedBook.status);
+        }
+    }, [selectedBook]);
+
     if (!selectedBook) {
         return null;
     }
@@ -124,10 +147,23 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                             style={{ fontFamily: 'Prompt', fontSize: 16 }}>
                             <strong>Return Date:</strong> {selectedBook.returnDateTime}
                         </Typography>
-                        <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} 
+                        {/* <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} 
                             style={{ fontFamily: 'Prompt', fontSize: 18 }}>
                             <a><strong>{selectedBook?.status.charAt(0).toUpperCase() + selectedBook?.status.slice(1)}</strong></a>        
-                        </Typography>
+                        </Typography> */}
+                        <Select
+                            className='dropdownstatus'
+                            value={status}
+                            onChange={handleStatusChange}
+                            displayEmpty
+                            inputProps={{ 'Prompt': 'Select book status' }}
+                            sx={{ marginTop: 2, fontFamily: 'Prompt', fontSize: 18, fontWeight: 'bold', color: '#EBE6E0', borderRadius: 4, border: 'none' }}
+                        >
+                            <MenuItem value="reserved">Reserved</MenuItem>
+                            <MenuItem value="available">Available</MenuItem>
+                            <MenuItem value="unavailable">Unavailable</MenuItem>
+                            <MenuItem value="borrowed">Borrowed</MenuItem>
+                        </Select>
                         
                         <Typography variant="h6" component="h2" style={{ marginTop: '16px', fontFamily: 'Prompt', fontSize: 18 }}>
                             <strong>Borrow History</strong>
