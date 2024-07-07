@@ -911,7 +911,17 @@ body {
     font-size: 18px;
 }
 
-.deletebtn:hover, .addbtn:hover, .addclosebtn button:hover {
+.deletebtn {
+    border: 2px solid #D0312D;
+    color: #D0312D;
+}
+
+.deletebtn:hover {
+    background-color: #D0312D;
+    color: var(--bg);
+}
+
+.addbtn:hover, .addclosebtn button:hover {
     background-color: var(--grn);
     color: var(--bg);
 }
