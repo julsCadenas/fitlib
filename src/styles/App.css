@@ -839,10 +839,12 @@ body {
 /* ADMIN PAGE CSS */
 
 .admincontainer {
-    width: 1600px;
+    width: 100%;
+    max-width: 1600px;
     height: 850px;
     overflow: auto;
     margin-top: 50px;
+    margin-bottom: 30px;
     /* border: 5px solid var(--border); */
 }
 
@@ -851,27 +853,28 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
-
 .elibraryadmin p {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
     color: var(--grn);
     font-size: 28px;
 }
 
 .elibraryadmin table {
     width: 100%;
+    max-width: 100%;
     border: 3px solid var(--border);
-    border-collapse: collapse; 
+    border-collapse: collapse;
     color: var(--font);
+    table-layout: auto;     
 }
 
 .elibraryadmin th,
 .elibraryadmin td {
-    border: 3px solid var(--border); 
-    padding: 8px; 
+    border: 3px solid var(--border);
+    padding: 8px;
 }
 
 .elibraryadmin button {
@@ -910,7 +913,7 @@ body {
 
 .deletebtn:hover, .addbtn:hover, .addclosebtn button:hover {
     background-color: var(--grn);
-    color: var(--bg)
+    color: var(--bg);
 }
 
 /* ADD BOOK MODAL */
@@ -920,18 +923,17 @@ body {
 }
 
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
+    display: none;
+    position: fixed;
+    z-index: 1003;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
 }
-
 
 .modal.is-open {
     display: block;
@@ -940,7 +942,7 @@ body {
 .modal-content {
     background-color: var(--bg);
     color: var(--font);
-    margin: 15% auto; 
+    margin: 15% auto;
     padding: 20px;
     border: 5px solid var(--border);
     border-radius: 10px;
@@ -948,28 +950,8 @@ body {
 }
 
 .modal-content input {
-    /* background-color: var(--input); */
-    /* color: var(--font); */
-}
-
-.modal-content h2 {
-    color: var(--grn);
-    margin-top: 5px;
-}
-
-.coverupload {
-    font-family: 'Prompt';
-}
-
-/* .label {
-    margin-bottom: 5px;
-} */
-
-.modal-content input {
     max-width: 500px;
-    /* max-height: 25px; */
     width: 100%;
-    /* height: 100%; */
     font-size: 16px;
     padding: 5px;
     border-radius: 11px;
@@ -983,7 +965,7 @@ body {
 
 .addclosebtn button {
     margin-right: 5px;
-} 
+}
 
 /* USER ADMIN CSS */
 
@@ -1001,7 +983,8 @@ body {
     height: 30px;
     font-size: 16px;
     background-color: var(--input);
-    border: 3px solid var(--border)
+    border: 3px solid var(--border);
+    color: var(--font);
 }
 
 .userscontainer p {
@@ -1010,4 +993,48 @@ body {
 
 .userscontainer h2 {
     color: var(--grn);
+}
+
+@media (max-width: 768px) {
+    .admincontainer {
+        max-width: 300px;
+        width: 100%;
+        /* height: 850px; */
+        /* margin-top: 50px; */
+    }
+    .elibraryadmin table {
+        font-size: 8px;
+    }
+    .elibraryadmin button {
+        font-size: 8px;
+    }
+    .elibraryadmin th,
+    .elibraryadmin td {
+    border: 3px solid var(--border);
+    padding: 1px;
+    }
+    .userscontainer{
+        padding-left: 20px;
+    }
+    #userstitles {
+        font-size: 24px;
+    }
+    .userscontainer h2 {
+        font-size: 18px;
+    }
+    .userscontainer p {
+        font-size: 14px;
+    }
+    .userscontainer select {
+        width: 250px;
+    }
+    .userscontainer ul {
+        font-size: 12px;
+    }
+    .modal-content {
+        width: 350px;
+    }
+    .modal-content input {
+        max-width: 320px;
+    }
 }

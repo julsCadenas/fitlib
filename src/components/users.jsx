@@ -66,7 +66,7 @@ const UserAdmin = () => {
         <>
             { userLoggedIn ? 
                 <div className='userscontainer'>
-                    <h2 className='userstitle'><strong>Users List</strong></h2>
+                    <h2 className='userstitle' id='userstitles'><strong>Users List</strong></h2>
                     <select value={selectedUserId} onChange={(e) => handleUserSelect(e.target.value)}>
                         <option value="">Select a user</option>
                         {users.map(user => (
