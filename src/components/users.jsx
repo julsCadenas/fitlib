@@ -66,7 +66,7 @@ const UserAdmin = () => {
         <>
             { userLoggedIn ? 
                 <div className='userscontainer'>
-                    <h2>User Admin Panel</h2>
+                    <h2 className='userstitle'><strong>Users List</strong></h2>
                     <select value={selectedUserId} onChange={(e) => handleUserSelect(e.target.value)}>
                         <option value="">Select a user</option>
                         {users.map(user => (
@@ -75,17 +75,17 @@ const UserAdmin = () => {
                     </select>
                     {selectedUser && (
                         <div>
-                            <h3>User Details</h3>
-                            <p>Name: {selectedUser.name}</p>
-                            <p>Student Number: {selectedUser.student_number}</p>
-                            <p>Program: {selectedUser.program}</p>
-                            <h4>Borrowed Books</h4>
+                            <h2>User Details</h2>
+                            <p><strong>Name: </strong> {selectedUser.name}</p>
+                            <p><strong>Student Number: </strong>{selectedUser.student_number}</p>
+                            <p><strong>Program:</strong> {selectedUser.program}</p>
+                            <h2>Borrowed Books</h2>
                             <ul>
                                 {selectedUser.borrowed.map(book => (
                                     <li key={book.id}>{book.title}</li>
                                 ))}
                             </ul>
-                            <h4>Favorites</h4>
+                            <h2>Favorites</h2>
                             <ul>
                                 {selectedUser.favorites.map(book => (
                                     <li key={book.id}>{book.title}</li>
