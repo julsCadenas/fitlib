@@ -8,6 +8,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import ElibModal from '../components/admindetails'; 
 import AddBookModal from '../components/addbook'; 
 import ElibAdmin from '../components/elibrarytable';
+import EbookAdmin from '../components/ebookstable';
 
 const Admin = () => {
     const { userLoggedIn } = useAuth(); 
@@ -20,7 +21,8 @@ const Admin = () => {
                 <SideBar />
                 <div className='admincontainer'>
                     <div className='bookstablecontainer'>
-                        <ElibAdmin />
+                        {/* <ElibAdmin /> */}
+                        <EbookAdmin />
                     </div>
                 </div> 
             </>

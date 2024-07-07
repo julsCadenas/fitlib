@@ -153,49 +153,54 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                             style={{ fontFamily: 'Prompt', fontWeight: 'bold', fontSize: 18 }}>
                             {selectedBook.title}
                         </Typography>
-                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
-                            style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 10 }}>
-                            <strong>Recent Holder:</strong> {selectedBook.borrowerName}
-                        </Typography>
-                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
-                            style={{ fontFamily: 'Prompt', fontSize: 16 }}>
-                            <strong>Student Number:</strong> {selectedBook.borrowerNumber}
-                        </Typography>
-                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
-                            style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 10 }}>
-                            <strong>Borrow Date:</strong> {selectedBook.reserveDateTime}
-                        </Typography>
-                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
-                            style={{ fontFamily: 'Prompt', fontSize: 16 }}>
-                            <strong>Return Date:</strong> {selectedBook.returnDateTime}
-                        </Typography>
-                        <Select
-                            className='dropdownstatus'
-                            value={status}
-                            onChange={handleStatusChange}
-                            displayEmpty
-                            inputProps={{ 'Prompt': 'Select book status' }}
-                            sx={{ marginTop: 2, fontFamily: 'Prompt', fontSize: 18, fontWeight: 'bold', color: '#EBE6E0', borderRadius: 4, border: 'none' }}
-                        >
-                            <MenuItem value="reserved">Reserved</MenuItem>
-                            <MenuItem value="available">Available</MenuItem>
-                            <MenuItem value="unavailable">Unavailable</MenuItem>
-                            <MenuItem value="borrowed">Borrowed</MenuItem>
-                        </Select>
-                        
-                        <Typography variant="h6" component="h2" style={{ marginTop: '16px', fontFamily: 'Prompt', fontSize: 18 }}>
-                            <strong>Borrow History</strong>
-                        </Typography>
-                        <ul>
-                            {bookData.map((history, index) => (
-                                <li key={index}>
-                                    <div><strong>Borrower: </strong>{history.borrowerName}-{history.borrowerNumber}</div>
-                                    <div><strong>Reserve: </strong>{history.reserveDateTime}</div>
-                                    <div><strong>Return: </strong>{history.returnDateTime}</div>
-                                </li>
-                            ))}
-                        </ul>
-                        <button className='deletebtn' onClick={handleDeleteBook}><strong>DELETE BOOK</strong></button>
+                        { selectedBook.collection === 'elibrary' ? (
+                        <>
+                            <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                                style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 10 }}>
+                                <strong>Recent Holder:</strong> {selectedBook.borrowerName}
+                            </Typography>
+                            <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                                style={{ fontFamily: 'Prompt', fontSize: 16 }}>
+                                <strong>Student Number:</strong> {selectedBook.borrowerNumber}
+                            </Typography>
+                            <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                                style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 10 }}>
+                                <strong>Borrow Date:</strong> {selectedBook.reserveDateTime}
+                            </Typography>
+                            <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                                style={{ fontFamily: 'Prompt', fontSize: 16 }}>
+                                <strong>Return Date:</strong> {selectedBook.returnDateTime}
+                            </Typography>
+                            <Select
+                                className='dropdownstatus'
+                                value={status}
+                                onChange={handleStatusChange}
+                                displayEmpty
+                                inputProps={{ 'Prompt': 'Select book status' }}
+                                sx={{ marginTop: 2, fontFamily: 'Prompt', fontSize: 18, fontWeight: 'bold', color: '#EBE6E0', borderRadius: 4, border: 'none' }}
+                            >
+                                <MenuItem value="reserved">Reserved</MenuItem>
+                                <MenuItem value="available">Available</MenuItem>
+                                <MenuItem value="unavailable">Unavailable</MenuItem>
+                                <MenuItem value="borrowed">Borrowed</MenuItem>
+                            </Select>
+                            
+                            <Typography variant="h6" component="h2" style={{ marginTop: '16px', fontFamily: 'Prompt', fontSize: 18 }}>
+                                <strong>Borrow History</strong>
+                            </Typography>
+                            <ul>
+                                {bookData.map((history, index) => (
+                                    <li key={index}>
+                                        <div><strong>Borrower: </strong>{history.borrowerName}-{history.borrowerNumber}</div>
+                                        <div><strong>Reserve: </strong>{history.reserveDateTime}</div>
+                                        <div><strong>Return: </strong>{history.returnDateTime}</div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </>
+                        ) : <button className='modalbtn' onClick={handleDownload} style={{ width: 300 }} ><strong>OPEN</strong></button> }
+
+                        <button className='deletebtn' onClick={handleDeleteBook} style={{ marginTop: 10 }}><strong>DELETE BOOK</strong></button>
                     </div>
                 </Box>
             </Fade>
