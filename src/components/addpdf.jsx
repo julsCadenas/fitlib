@@ -15,7 +15,7 @@ const AddPdfModal = ({ open, handleClose }) => {
 
     const handleFileUpload = async (e) => {
         const file = e.target.files[0]; 
-        const storageRef = ref(storage, `covers/${file.name}`);
+        const storageRef = ref(storage, `books/${file.name}`);
 
         try {
             await uploadBytes(storageRef, file);

@@ -9,6 +9,7 @@ import ElibModal from '../components/admindetails';
 import AddBookModal from '../components/addbook'; 
 import ElibAdmin from '../components/elibrarytable';
 import EbookAdmin from '../components/ebookstable';
+import UserAdmin from '../components/users';
 
 const Admin = () => {
     const { userLoggedIn } = useAuth(); 
@@ -23,6 +24,7 @@ const Admin = () => {
                     <div className='bookstablecontainer'>
                         {/* <ElibAdmin /> */}
                         <EbookAdmin />
+                        {/* <UserAdmin /> */}
                     </div>
                 </div> 
             </>

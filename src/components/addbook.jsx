@@ -14,7 +14,7 @@ const AddBookModal = ({ open, handleClose }) => {
 
     const handleFileUpload = async (e) => {
         const file = e.target.files[0]; 
-        const storageRef = ref(storage, `covers/${file.name}`);
+        const storageRef = ref(storage, `elibrary/${file.name}`);
 
         try {
             await uploadBytes(storageRef, file);
