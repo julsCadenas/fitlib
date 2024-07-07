@@ -1,5 +1,5 @@
 import db from '../firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, doc } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/authContext';
 import Login from '../pages/login';
@@ -16,10 +16,30 @@ const UserAdmin = () => {
             try {
                 const usersCollection = collection(db, 'Users');
                 const usersSnapshot = await getDocs(usersCollection);
-                const userList = usersSnapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
+                const userList = await Promise.all(usersSnapshot.docs.map(async (userDoc) => {
+                    const borrowedCollection = collection(userDoc.ref, 'borrowed');
+                    const favoritesCollection = collection(userDoc.ref, 'favorites');
+                    const borrowedSnapshot = await getDocs(borrowedCollection);
+                    const favoritesSnapshot = await getDocs(favoritesCollection);
+
+                    const borrowedList = borrowedSnapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+
+                    const favoritesList = favoritesSnapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+
+                    return {
+                        id: userDoc.id,
+                        ...userDoc.data(),
+                        borrowed: borrowedList,
+                        favorites: favoritesList
+                    };
                 }));
+
                 setUsers(userList);
             } catch (error) {
                 console.error('Error fetching users:', error);
@@ -59,6 +79,18 @@ const UserAdmin = () => {
                             <p>Name: {selectedUser.name}</p>
                             <p>Student Number: {selectedUser.student_number}</p>
                             <p>Program: {selectedUser.program}</p>
+                            <h4>Borrowed Books</h4>
+                            <ul>
+                                {selectedUser.borrowed.map(book => (
+                                    <li key={book.id}>{book.title}</li>
+                                ))}
+                            </ul>
+                            <h4>Favorites</h4>
+                            <ul>
+                                {selectedUser.favorites.map(book => (
+                                    <li key={book.id}>{book.title}</li>
+                                ))}
+                            </ul>
                         </div>
                     )}
                 </div>
