@@ -7,8 +7,8 @@ import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { auth, firestore, storage } from '../firebase';
-import { doc, getDoc, getDocs, collection, updateDoc,deleteDoc } from "firebase/firestore"; 
-import { ref, getDownloadURL } from "firebase/storage";
+import { doc, getDoc, getDocs, collection, updateDoc, deleteDoc } from "firebase/firestore"; 
+import { ref, getDownloadURL, deleteObject } from "firebase/storage";
 import db from '../firebase';
 
 const style = {
@@ -100,11 +100,20 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
         if (selectedBook) {
             try {
                 const bookRef = doc(db, 'Library', `book${selectedBook.bookID.toString()}`);
+                console.log(`Attempting to delete Firestore document: book${selectedBook.bookID.toString()}`);
+                
+                const imageRef = ref(storage, `covers/book${selectedBook.bookID.toString()}.jpg` || `covers/book${selectedBook.bookID.toString()}.png` );
+                console.log(`Attempting to delete image from Firebase Storage: covers/book${selectedBook.bookID.toString()}`);
+
                 await deleteDoc(bookRef);
-                console.log('book deleted');
+                console.log('Book deleted from Firestore');
+
+                await deleteObject(imageRef);
+                console.log('Image deleted from Firebase Storage');
+
                 handleClose(); 
             } catch (error) {
-                console.error('error:', error);
+                console.error('Error deleting book or image:', error);
             }
         }
     };

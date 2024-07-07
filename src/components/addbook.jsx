@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { collection, addDoc, setDoc, doc } from 'firebase/firestore';
-import db from '../firebase';
+import { collection, setDoc, doc } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'; 
+import db, { storage } from '../firebase'; 
 
 const AddBookModal = ({ open, handleClose }) => {
     const [bookID, setBookID] = useState('');
@@ -9,6 +10,21 @@ const AddBookModal = ({ open, handleClose }) => {
     const [bookClass, setBookClass] = useState('');
     const [cover, setCover] = useState('');
     const [bookCollection, setBookCollection] = useState('');
+    const [coverImage, setCoverImage] = useState(null); 
+
+    const handleFileUpload = async (e) => {
+        const file = e.target.files[0]; 
+        const storageRef = ref(storage, `covers/${file.name}`);
+
+        try {
+            await uploadBytes(storageRef, file);
+            const downloadURL = await getDownloadURL(storageRef);
+            setCover(downloadURL); 
+            setCoverImage(file); 
+        } catch (error) {
+            console.error('Error uploading file: ', error);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,15 +40,7 @@ const AddBookModal = ({ open, handleClose }) => {
 
         try {
             const collectionRef = collection(db, 'Library');
-
-            await setDoc(doc(collectionRef, `book${bookID.toString()}`), {
-                bookID,
-                title,
-                author,
-                class: bookClass,
-                cover,
-                collection: bookCollection,
-            });
+            await setDoc(doc(collectionRef, `book${bookID.toString()}`), bookData);
             handleClose();
         } catch (error) {
             console.error("Error adding document: ", error);
@@ -78,7 +86,10 @@ const AddBookModal = ({ open, handleClose }) => {
                         <div className='label'>
                             <label htmlFor="cover"><strong>Cover: </strong></label>
                         </div>
-                        <input type="text" id="cover" value={cover} onChange={(e) => setCover(e.target.value)} required />
+                        <input type="file" id="cover" onChange={handleFileUpload} accept="image/*" />
+                        {cover && (
+                            <img src={cover} alt="Cover Preview" style={{ maxWidth: '100%', marginTop: '10px' }} />
+                        )}
                     </div>
                     <div className='addclosebtn'>
                         <button onClick={handleClose}><strong>CLOSE</strong></button>
