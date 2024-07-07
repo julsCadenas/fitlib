@@ -969,3 +969,9 @@ body {
 .addclosebtn button {
     margin-right: 5px;
 } 
+
+/* USER ADMIN CSS */
+
+.useradmintitle {
+    margin-top: -1200px;
+}

@@ -23,8 +23,8 @@ const Admin = () => {
                 <div className='admincontainer'>
                     <div className='bookstablecontainer'>
                         {/* <ElibAdmin /> */}
-                        <EbookAdmin />
-                        {/* <UserAdmin /> */}
+                        {/* <EbookAdmin /> */}
+                        <UserAdmin />
                     </div>
                 </div> 
             </>
