@@ -147,10 +147,6 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                             style={{ fontFamily: 'Prompt', fontSize: 16 }}>
                             <strong>Return Date:</strong> {selectedBook.returnDateTime}
                         </Typography>
-                        {/* <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} 
-                            style={{ fontFamily: 'Prompt', fontSize: 18 }}>
-                            <a><strong>{selectedBook?.status.charAt(0).toUpperCase() + selectedBook?.status.slice(1)}</strong></a>        
-                        </Typography> */}
                         <Select
                             className='dropdownstatus'
                             value={status}
@@ -177,7 +173,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                                 </li>
                             ))}
                         </ul>
-                        
+                        <button className='deletebtn'><strong>DELETE BOOK</strong></button>
                     </div>
                 </Box>
             </Fade>

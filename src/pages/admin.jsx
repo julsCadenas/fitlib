@@ -5,12 +5,14 @@ import { useAuth } from '../contexts/authContext';
 import React, { useState, useEffect } from 'react';
 import db from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import ElibModal from '../components/admindetails'; // Assuming ElibModal is your modal component
+import ElibModal from '../components/admindetails'; 
+import AddBookModal from '../components/addbook'; 
 
 const Admin = () => {
     const { userLoggedIn } = useAuth(); 
     const [books, setBooks] = useState([]);
-    const [open, setOpen] = useState(false);
+    const [openDetails, setOpenDetails] = useState(false);
+    const [openAddBook, setOpenAddBook] = useState(false); 
     const [selectedBook, setSelectedBook] = useState(null);
 
     useEffect(() => {
@@ -24,12 +26,16 @@ const Admin = () => {
         fetchBooks();
     }, []); 
 
-    const handleOpen = (book) => {
+    const handleOpenDetails = (book) => {
         setSelectedBook(book);
-        setOpen(true);
+        setOpenDetails(true);
     };
 
-    const handleClose = () => setOpen(false);
+    const handleCloseDetails = () => setOpenDetails(false);
+
+    const handleOpenAddBook = () => setOpenAddBook(true);
+
+    const handleCloseAddBook = () => setOpenAddBook(false);
 
     return (
         <>
@@ -61,7 +67,7 @@ const Admin = () => {
                                             <td>{book.class}</td>
                                             <td>{book.status}</td>
                                             <td>
-                                                <button onClick={() => handleOpen(book)}>
+                                                <button onClick={() => handleOpenDetails(book)}>
                                                     <strong>Details</strong>
                                                 </button>
                                             </td>
@@ -70,12 +76,17 @@ const Admin = () => {
                                 </tbody>
                             </table>
                         </div>
+                        <button className='addbtn' onClick={handleOpenAddBook}><strong>ADD BOOK</strong></button>
                     </div>
                 </div> 
                 <ElibModal
-                    open={open}
-                    handleClose={handleClose}
+                    open={openDetails}
+                    handleClose={handleCloseDetails}
                     selectedBook={selectedBook}
+                />
+                <AddBookModal
+                    open={openAddBook}
+                    handleClose={handleCloseAddBook}
                 />
             </>
             :
