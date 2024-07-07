@@ -20,6 +20,8 @@ const style = {
     borderRadius: 8,
     boxShadow: 24,
     p: 4,
+    maxHeight: '80vh', 
+    overflowY: 'auto'
 };
 
 const BookDetails = ({ open, handleClose, selectedBook }) => {
@@ -31,11 +33,11 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
         const fetchBooks = async () => {
             try {
                 if (selectedBook) {
-                    const booksCollection = collection(db, 'Library', `book${selectedBook.bookID.toString()}`);
-                    const historyCollection = collection(booksCollection, 'BookReserveHistory');
-                    const historySnapshot = await getDocs(historyCollection);
+                    const booksCollection = collection(db, 'Library', `book${selectedBook.bookID.toString()}`, 'BookReserveHistory');
+                    const historySnapshot = await getDocs(booksCollection);
                     const historyList = historySnapshot.docs.map(doc => doc.data());
                     setBookData(historyList);
+                    console.log('Fetched history:', historyList);
                 }
             } catch (error) {
                 console.error('Error fetching book data:', error);
@@ -106,19 +108,36 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                             style={{ fontFamily: 'Prompt', fontWeight: 'bold', fontSize: 18 }}>
                             {selectedBook.title}
                         </Typography>
+                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                            style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 10 }}>
+                            <strong>Recent Holder:</strong> {selectedBook.borrowerName}
+                        </Typography>
+                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                            style={{ fontFamily: 'Prompt', fontSize: 16 }}>
+                            <strong>Student Number:</strong> {selectedBook.borrowerNumber}
+                        </Typography>
+                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                            style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 10 }}>
+                            <strong>Borrow Date:</strong> {selectedBook.reserveDateTime}
+                        </Typography>
+                        <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                            style={{ fontFamily: 'Prompt', fontSize: 16 }}>
+                            <strong>Return Date:</strong> {selectedBook.returnDateTime}
+                        </Typography>
                         <Typography className='modalstatus' id="transition-modal-description" sx={{ mt: 2 }} 
                             style={{ fontFamily: 'Prompt', fontSize: 18 }}>
                             <a><strong>{selectedBook?.status.charAt(0).toUpperCase() + selectedBook?.status.slice(1)}</strong></a>        
                         </Typography>
                         
                         <Typography variant="h6" component="h2" style={{ marginTop: '16px', fontFamily: 'Prompt', fontSize: 18 }}>
-                            Borrow History
+                            <strong>Borrow History</strong>
                         </Typography>
                         <ul>
                             {bookData.map((history, index) => (
                                 <li key={index}>
-                                    reserved: {history.reserveDateTime}
-                                    return on: {history.returnDateTime}
+                                    <div><strong>Borrower: </strong>{history.borrowerName}-{history.borrowerNumber}</div>
+                                    <div><strong>Reserve: </strong>{history.reserveDateTime}</div>
+                                    <div><strong>Return: </strong>{history.returnDateTime}</div>
                                 </li>
                             ))}
                         </ul>
