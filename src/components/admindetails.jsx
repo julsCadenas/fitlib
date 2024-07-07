@@ -31,6 +31,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
     const [isReserved, setIsReserved] = useState(false);
     const [bookData, setBookData] = useState([]);
     const [status, setStatus] = useState('');
+    const [paymentAmount, setPaymentAmount] = useState(0); // State to hold payment amount
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -128,13 +129,30 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
             }
         }
     };
-    
-    
 
     useEffect(() => {
         if (selectedBook) {
             setStatus(selectedBook.status);
         }
+    }, [selectedBook]);
+
+    // Calculate payment amount based on overdue days
+    useEffect(() => {
+        const calculatePayment = () => {
+            if (selectedBook && selectedBook.returnDateTime) {
+                const returnDate = new Date(selectedBook.returnDateTime);
+                const currentDate = new Date();
+                if (currentDate > returnDate) {
+                    const diffTime = Math.abs(currentDate - returnDate);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    const payment = diffDays * 5; // 5 pesos per day overdue
+                    return payment;
+                }
+            }
+            return 0;
+        };
+
+        setPaymentAmount(calculatePayment());
     }, [selectedBook]);
 
     if (!selectedBook) {
@@ -183,6 +201,10 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                             <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
                                 style={{ fontFamily: 'Prompt', fontSize: 16 }}>
                                 <strong>Return Date:</strong> {selectedBook.returnDateTime}
+                            </Typography>
+                            <Typography className='modaltitle' id="transition-modal-title" variant="h6" component="h2" 
+                                style={{ fontFamily: 'Prompt', fontSize: 16 }}>
+                                <strong>Payment:</strong> Php {paymentAmount} 
                             </Typography>
                             <Select
                                 className='dropdownstatus'

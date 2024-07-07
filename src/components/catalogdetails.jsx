@@ -24,6 +24,7 @@ const style = {
 const CatalogDetails = ({ open, handleClose, selectedBook }) => {
     const darkMode = document.querySelector("body").getAttribute('data-theme') === 'Dark';
     const [isFavorite, setIsFavorite] = useState(false);
+    const [paymentAmount, setPaymentAmount] = useState(0); // State to hold payment amount
     const storage = getStorage();
 
     const handleDownload = () => {
@@ -35,6 +36,20 @@ const CatalogDetails = ({ open, handleClose, selectedBook }) => {
         } catch (error) {
             console.error('Error fetching file URL:', error.code, error.message);
         }
+    };
+
+    const calculatePayment = () => {
+        if (selectedBook && selectedBook.returnDateTime) {
+            const returnDate = new Date(selectedBook.returnDateTime);
+            const currentDate = new Date();
+            if (currentDate > returnDate) {
+                const diffTime = Math.abs(currentDate - returnDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const payment = diffDays * 5; 
+                return payment;
+            }
+        }
+        return 0;
     };
 
     useEffect(() => {
@@ -54,6 +69,8 @@ const CatalogDetails = ({ open, handleClose, selectedBook }) => {
 
         if (open && selectedBook) {
             checkIfFavorite();
+            const payment = calculatePayment();
+            setPaymentAmount(payment);
         }
     }, [open, selectedBook]);
 
@@ -147,6 +164,10 @@ const CatalogDetails = ({ open, handleClose, selectedBook }) => {
                                     style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5 }}>
                                     <strong>Return by:</strong> {selectedBook.returnDateTime}
                                 </Typography>
+                                    <Typography className='modalauthor' id="transition-modal-description" sx={{ mt: 2 }} 
+                                        style={{ fontFamily: 'Prompt', fontSize: 16, marginTop: 5 }}>
+                                        <strong>Payment:</strong> Php {paymentAmount.toFixed(2)}
+                                    </Typography>
                             </>
                             : <></>
                         }   
