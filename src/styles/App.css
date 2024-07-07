@@ -839,12 +839,21 @@ body {
 /* ADMIN PAGE CSS */
 
 .admincontainer {
-    margin-top: 1000px;
+    width: 1600px;
+    height: 850px;
+    overflow: auto;
+    margin-top: 50px;
+    /* border: 5px solid var(--border); */
 }
 
-.elibraryadmin {
-    /* margin: 20px;  */
+.bookstablecontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px; 
 }
+
 
 .elibraryadmin p {
     margin-bottom: 10px; 
@@ -971,7 +980,3 @@ body {
 } 
 
 /* USER ADMIN CSS */
-
-.useradmintitle {
-    margin-top: -1200px;
-}

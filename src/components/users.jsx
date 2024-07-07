@@ -3,10 +3,13 @@ import { collection, getDocs } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/authContext';
 import Login from '../pages/login';
+import UserModal from './usermodal';
 
 const UserAdmin = () => {
     const [users, setUsers] = useState([]);
-    const { userLoggedIn } = useAuth(); 
+    const [selectedUserId, setSelectedUserId] = useState(null);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const { userLoggedIn } = useAuth();
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -24,45 +27,46 @@ const UserAdmin = () => {
         };
 
         fetchUsers();
-    }, []); 
+    }, []);
+
+    useEffect(() => {
+        if (selectedUserId) {
+            const user = users.find(user => user.id === selectedUserId);
+            setSelectedUser(user);
+        } else {
+            setSelectedUser(null);
+        }
+    }, [selectedUserId, users]);
+
+    const handleUserSelect = (userId) => {
+        setSelectedUserId(userId);
+    };
 
     return (
         <>
-        { userLoggedIn ? 
-            <>
-                <div className='admincontainer'>
-                    <div className='bookstablecontainer'>
-                        <div className='elibraryadmin'>
-                            <p><strong>Users</strong></p>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Student Number</th>
-                                        <th>Program</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {users.map(user => (
-                                    <tr key={user.id}>
-                                        <td>{user.id}</td>
-                                        <td>{user.name}</td>
-                                        <td>{user.student_number}</td>
-                                        <td>{user.program}</td>
-                                    </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+            { userLoggedIn ? 
+                <div className='userscontainer'>
+                    <h2>User Admin Panel</h2>
+                    <select value={selectedUserId} onChange={(e) => handleUserSelect(e.target.value)}>
+                        <option value="">Select a user</option>
+                        {users.map(user => (
+                            <option key={user.id} value={user.id}>{user.id}</option>
+                        ))}
+                    </select>
+                    {selectedUser && (
+                        <div>
+                            <h3>User Details</h3>
+                            <p>Name: {selectedUser.name}</p>
+                            <p>Student Number: {selectedUser.student_number}</p>
+                            <p>Program: {selectedUser.program}</p>
                         </div>
-                    </div>
-                </div> 
-            </>
-            :
-            <Login />
-        }
+                    )}
+                </div>
+                :
+                <Login />
+            }
         </>
     );
-}
+};
 
 export default UserAdmin;

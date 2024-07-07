@@ -41,7 +41,7 @@ const ElibAdmin = () => {
         <>
         { userLoggedIn ? 
             <>
-                <div className='admincontainer'>
+                <div className='elibadmincontainer'>
                     <div className='bookstablecontainer'>
                         <div className='elibraryadmin'>
                             <p><strong>eLibrary</strong></p>

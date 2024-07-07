@@ -55,7 +55,7 @@ const EbookAdmin = () => {
         <>
         { userLoggedIn ? 
             <>
-                <div className='admincontainer'>
+                <div className='ebookadmincontainer'>
                     <div className='bookstablecontainer'>
                         <div className='elibraryadmin'>
                             <p><strong>eBooks</strong></p>

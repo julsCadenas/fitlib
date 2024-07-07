@@ -22,8 +22,8 @@ const Admin = () => {
                 <SideBar />
                 <div className='admincontainer'>
                     <div className='bookstablecontainer'>
-                        {/* <ElibAdmin /> */}
-                        {/* <EbookAdmin /> */}
+                        <ElibAdmin />
+                        <EbookAdmin />
                         <UserAdmin />
                     </div>
                 </div> 
