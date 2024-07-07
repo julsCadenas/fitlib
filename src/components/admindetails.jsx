@@ -5,10 +5,9 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { auth, firestore, storage } from '../firebase';
-import { doc, setDoc, getDoc, collection, deleteDoc, updateDoc } from "firebase/firestore"; 
+import { doc, getDoc, getDocs, collection } from "firebase/firestore"; 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faHeartBroken } from '@fortawesome/free-solid-svg-icons'; 
+import db from '../firebase';
 
 const style = {
     position: 'absolute',
@@ -26,19 +25,27 @@ const style = {
 const BookDetails = ({ open, handleClose, selectedBook }) => {
     const darkMode = document.querySelector("body").getAttribute('data-theme') === 'Dark';
     const [isReserved, setIsReserved] = useState(false);
-    const storage = getStorage();
+    const [bookData, setBookData] = useState([]);
 
-    const handleDownload = () => {
-        try {
-            const url = getDownloadURL(ref(storage, `bookfiles/${selectedBook?.title}.pdf`)).then(url=>{
-                window.open(url,'_blank')
-            });
-
-        } catch (error) {
-            console.error('Error fetching file URL:', error.code, error.message);
-        }
-    };
+    useEffect(() => {
+        const fetchBooks = async () => {
+            try {
+                if (selectedBook) {
+                    const booksCollection = collection(db, 'Library', `book${selectedBook.bookID.toString()}`);
+                    const historyCollection = collection(booksCollection, 'BookReserveHistory');
+                    const historySnapshot = await getDocs(historyCollection);
+                    const historyList = historySnapshot.docs.map(doc => doc.data());
+                    setBookData(historyList);
+                }
+            } catch (error) {
+                console.error('Error fetching book data:', error);
+            }
+        };
     
+        if (open && selectedBook) {
+            fetchBooks();
+        }
+    }, [open, selectedBook]);
 
     useEffect(() => {
         const checkIfReserved = async () => {
@@ -51,7 +58,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     setIsReserved(bookDoc.exists());
                 }
             } catch (error) {
-                console.error('error:', error);
+                console.error('Error checking reservation:', error);
             }
         };
 
@@ -59,6 +66,16 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
             checkIfReserved();
         }
     }, [open, selectedBook]);
+
+    const handleDownload = () => {
+        try {
+            getDownloadURL(ref(storage, `bookfiles/${selectedBook?.title}.pdf`)).then(url => {
+                window.open(url, '_blank');
+            });
+        } catch (error) {
+            console.error('Error fetching file URL:', error.code, error.message);
+        }
+    };
 
     if (!selectedBook) {
         return null;
@@ -93,6 +110,19 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                             style={{ fontFamily: 'Prompt', fontSize: 18 }}>
                             <a><strong>{selectedBook?.status.charAt(0).toUpperCase() + selectedBook?.status.slice(1)}</strong></a>        
                         </Typography>
+                        
+                        <Typography variant="h6" component="h2" style={{ marginTop: '16px', fontFamily: 'Prompt', fontSize: 18 }}>
+                            Borrow History
+                        </Typography>
+                        <ul>
+                            {bookData.map((history, index) => (
+                                <li key={index}>
+                                    reserved: {history.reserveDateTime}
+                                    return on: {history.returnDateTime}
+                                </li>
+                            ))}
+                        </ul>
+                        
                     </div>
                 </Box>
             </Fade>

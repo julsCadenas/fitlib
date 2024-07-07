@@ -27,6 +27,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
     const darkMode = document.querySelector("body").getAttribute('data-theme') === 'Dark';
     const [isFavorite, setIsFavorite] = useState(false);
     const [isReserved, setIsReserved] = useState(false);
+    const [userDetails, setUserDetails] = useState(null);
     const storage = getStorage();
 
     const handleDownload = () => {
@@ -39,8 +40,25 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
             console.error('Error fetching file URL:', error.code, error.message);
         }
     };
-    
 
+    useEffect(() => {
+        const fetchUserDetails = async () => {
+            try {
+                const currentUser = auth.currentUser;
+                if (currentUser) {
+                    const userDoc = await getDoc(doc(firestore, 'Users', currentUser.uid));
+                    if (userDoc.exists()) {
+                        setUserDetails(userDoc.data());
+                    }
+                }
+            } catch (error) {
+                console.error('error:', error);
+            }
+        };
+
+        fetchUserDetails();
+    }, []);
+    
     useEffect(() => {
         const checkIfFavorite = async () => {
             try {
@@ -155,7 +173,9 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                 await updateDoc(doc(libraryCollectionRef, `book${selectedBook.bookID.toString()}`), {
                     status: 'reserved',
                     reserveDateTime: reserveDateTime,
-                    returnDateTime: returnDateTime 
+                    returnDateTime: returnDateTime,
+                    borrowerName: userDetails.name,
+                    borrowerNumber: userDetails.student_number
                 });
     
                 await setDoc(doc(borrowedCollectionRef, `book${selectedBook.bookID.toString()}`), {
@@ -167,7 +187,9 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     status: 'reserved',
                     bookID: selectedBook.bookID,
                     reserveDateTime: reserveDateTime,
-                    returnDateTime: returnDateTime 
+                    returnDateTime: returnDateTime ,
+                    borrowerName: userDetails.name,
+                    borrowerNumber: userDetails.student_number
                 });
     
                 const isoString = now.toISOString();
@@ -184,7 +206,9 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     status: 'reserved',
                     bookID: selectedBook.bookID,
                     reserveDateTime: reserveDateTime,
-                    returnDateTime: returnDateTime 
+                    returnDateTime: returnDateTime,
+                    borrowerName: userDetails.name,
+                    borrowerNumber: userDetails.student_number 
                 });
                 
                 await setDoc(doc(bookCollectionRef, documentName), {
@@ -196,7 +220,9 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     status: 'reserved',
                     bookID: selectedBook.bookID,
                     reserveDateTime: reserveDateTime,
-                    returnDateTime: returnDateTime 
+                    returnDateTime: returnDateTime, 
+                    borrowerName: userDetails.name,
+                    borrowerNumber: userDetails.student_number
                 });
 
                 console.log('reserved book');
@@ -244,7 +270,9 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     collection: selectedBook.collection,
                     status: 'available',
                     bookID: selectedBook.bookID,
-                    reserveDateTime: reserveDateTime 
+                    reserveDateTime: reserveDateTime,
+                    borrowerName: userDetails.name,
+                    borrowerNumber: userDetails.student_number 
                 });
                 
                 await setDoc(doc(bookCollectionRef, documentName), {
@@ -255,7 +283,9 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                     cover: selectedBook.cover,
                     status: 'available',
                     bookID: selectedBook.bookID,
-                    reserveDateTime: reserveDateTime 
+                    reserveDateTime: reserveDateTime,
+                    borrowerName: userDetails.name,
+                    borrowerNumber: userDetails.student_number 
                 });
 
                 console.log('removed from reservations');
