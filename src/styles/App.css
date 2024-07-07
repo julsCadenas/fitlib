@@ -997,7 +997,7 @@ body {
 
 @media (max-width: 768px) {
     .admincontainer {
-        max-width: 300px;
+        max-width: 390px;
         width: 100%;
         /* height: 850px; */
         /* margin-top: 50px; */
@@ -1005,8 +1005,14 @@ body {
     .elibraryadmin table {
         font-size: 8px;
     }
+    .elibraryadmin p {
+        font-size: 24px;
+    }
     .elibraryadmin button {
         font-size: 8px;
+    }
+    .addbtn {
+        font-size: 16px;
     }
     .elibraryadmin th,
     .elibraryadmin td {
