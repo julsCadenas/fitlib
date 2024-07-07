@@ -17,11 +17,15 @@ const Login = () => {
     e.preventDefault()
     if(!isSigningIn){
       setIsSigningIn(true)
-      await doSignInWithEmailandPassword(email, password)
+      setErrorMessage('')  
+      try {
+        await doSignInWithEmailandPassword(email, password)
+      } catch (error) {
+        setErrorMessage('Invalid Email or Password')
+        setIsSigningIn(false)
+      }
     }
   }
-
-  
 
   return (
     <div>
@@ -48,18 +52,17 @@ const Login = () => {
                       value={password} onChange={(e) => { setPassword(e.target.value)}}/>
               </div>
               {errorMessage && (
-                <span className='text-red-600 font-bold'>{errorMessage}</span>
+                <span className='loginerror'>{errorMessage}</span>
               )} 
             <div className="loginBtn">
                 <button type="submit" 
                         disabled={isSigningIn}>
-                        {isSigningIn ? 'Logging In...' : 'Log In'}
+                        Log In
                 </button>
             </div>
         </form>
     </div>
     </div>
-
   );
 };
 

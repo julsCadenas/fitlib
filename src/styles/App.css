@@ -239,6 +239,12 @@ body {
     align-items: center;
 }
 
+.loginerror {
+    color: #D0312D;
+    margin-top: 10px;
+    margin-bottom: -30px;
+}
+
 .logintitle img {
     width: 750px;
     height: auto;
