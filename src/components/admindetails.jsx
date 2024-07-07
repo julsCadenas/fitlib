@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { auth, firestore, storage } from '../firebase';
-import { doc, getDoc, getDocs, collection, updateDoc } from "firebase/firestore"; 
+import { doc, getDoc, getDocs, collection, updateDoc,deleteDoc } from "firebase/firestore"; 
 import { ref, getDownloadURL } from "firebase/storage";
 import db from '../firebase';
 
@@ -96,6 +96,19 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
         }
     };
 
+    const handleDeleteBook = async () => {
+        if (selectedBook) {
+            try {
+                const bookRef = doc(db, 'Library', `book${selectedBook.bookID.toString()}`);
+                await deleteDoc(bookRef);
+                console.log('book deleted');
+                handleClose(); 
+            } catch (error) {
+                console.error('error:', error);
+            }
+        }
+    };
+
     useEffect(() => {
         if (selectedBook) {
             setStatus(selectedBook.status);
@@ -173,7 +186,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                                 </li>
                             ))}
                         </ul>
-                        <button className='deletebtn'><strong>DELETE BOOK</strong></button>
+                        <button className='deletebtn' onClick={handleDeleteBook}><strong>DELETE BOOK</strong></button>
                     </div>
                 </Box>
             </Fade>
