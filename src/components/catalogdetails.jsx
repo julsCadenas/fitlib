@@ -24,7 +24,7 @@ const style = {
 const CatalogDetails = ({ open, handleClose, selectedBook }) => {
     const darkMode = document.querySelector("body").getAttribute('data-theme') === 'Dark';
     const [isFavorite, setIsFavorite] = useState(false);
-    const [paymentAmount, setPaymentAmount] = useState(0); // State to hold payment amount
+    const [paymentAmount, setPaymentAmount] = useState(0); 
     const storage = getStorage();
 
     const handleDownload = () => {
