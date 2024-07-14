@@ -31,7 +31,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
     const [isReserved, setIsReserved] = useState(false);
     const [bookData, setBookData] = useState([]);
     const [status, setStatus] = useState('');
-    const [paymentAmount, setPaymentAmount] = useState(0); // State to hold payment amount
+    const [paymentAmount, setPaymentAmount] = useState(0); 
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -136,7 +136,6 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
         }
     }, [selectedBook]);
 
-    // Calculate payment amount based on overdue days
     useEffect(() => {
         const calculatePayment = () => {
             if (selectedBook && selectedBook.returnDateTime) {
@@ -145,7 +144,7 @@ const BookDetails = ({ open, handleClose, selectedBook }) => {
                 if (currentDate > returnDate) {
                     const diffTime = Math.abs(currentDate - returnDate);
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    const payment = diffDays * 5; // 5 pesos per day overdue
+                    const payment = diffDays * 5; 
                     return payment;
                 }
             }

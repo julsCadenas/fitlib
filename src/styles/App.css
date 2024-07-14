@@ -290,7 +290,7 @@ body {
     border-radius: 16px;
     border: none;
     transition: width 0.3s ease;
-    
+    cursor: pointer;
 }
 
 .loginBtn button:hover {
@@ -915,6 +915,14 @@ body {
     border: 2px solid var(--grn);
     border-radius: 8px;
     font-size: 18px;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    cursor: pointer;
 }
 
 .deletebtn {
