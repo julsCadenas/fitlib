@@ -211,6 +211,7 @@ body {
     }
     .sidebarBtn.open {
         left: 320px;
+        opacity: 0;
     }
     .nav {
         margin-top: 40px;
