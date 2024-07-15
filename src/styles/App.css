@@ -83,6 +83,7 @@ body {
     position: fixed; 
     top: 0; 
     left: 0;
+    /* overflow-y: auto; */
 }
 
 .sidebar.open {
@@ -165,7 +166,7 @@ body {
     top: 20px;
     left: 20px;
     transition: font-size 0.3s ease, left 0.3s ease;
-    z-index: 1010;
+    z-index: 4010;
     position: fixed;
     /* background-color: var(--bg); */
 }
@@ -196,6 +197,7 @@ body {
     }
     .sidebar {
         width: 300px;
+        height: 100%;
     }
     .title img {
         width: 310px;
