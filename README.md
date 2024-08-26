@@ -36,3 +36,20 @@ Your app is ready to be deployed!
 - Daryl Guerzon
 - Christian Javier
 - Bonifacio Vitasa
+
+## Website Screenshots
+
+### Login Page
+![login](./src/images/screenshots/login.png)
+
+### Dashboard
+![dashboard](./src/images/screenshots/dashboard.png)
+
+### Library Proper Page
+![ebooks](./src/images/screenshots/ebooks.png)
+
+### User Profile
+![profile](./src/images/screenshots/profile.png)
+
+### Admin Page
+![admin](./src/images/screenshots/admin.png)
