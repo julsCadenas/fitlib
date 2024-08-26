@@ -36,10 +36,11 @@ const Login = () => {
           <div className="logintitle"><img src={logo}></img></div>
           <div className="loginsubtitle">Official Library of the FEU Institute of Technology</div>
         </div>
-        <form action="#" className='loginform' onSubmit={onSubmit}>
+        <form action="#" className='loginform' id='loginform' onSubmit={onSubmit}>
           <div className="loginname">
                 <i className="fas fa-user"></i>
                 <input type="email" 
+                      className='email' id='email'  
                       placeholder="Student Email" 
                       required 
                       value={email} onChange={(e) => { setEmail(e.target.value)}}/>
@@ -47,6 +48,7 @@ const Login = () => {
               <div className="password">
                 <i className="fas fa-lock"></i>
                 <input type="password" 
+                      className='password' id='password'
                       placeholder="Password" 
                       required 
                       value={password} onChange={(e) => { setPassword(e.target.value)}}/>
