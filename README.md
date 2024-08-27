@@ -2,6 +2,7 @@
 
 A website made using React.js and Firebase for as a final requirement in our Software Design course. 
 This platform is designed to allow students to reserve or borrow books in advance before going to the library, and also to access books provided by FEU Tech in one centralized web application.
+The project emulates the school's system, where if a person is enrolled, they automatically have an account within the web app, which explains the lack of a "sign up" function.
 
 In the project directory, to start, run:
 
